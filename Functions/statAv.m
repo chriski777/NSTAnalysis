@@ -1,4 +1,4 @@
-function statAvParam = statAv(data)
+function outPut = statAv(data)
 %Chris Ki, June 2017, Gittis Lab
 %StatAv: Calculates the StatAv Parameter (Palazzolo et al., 1998). The StatAv has 
 %   been adapted to follow the analysis conducted in "Nonlinear Anlaysis of Discharge
@@ -9,6 +9,7 @@ function statAvParam = statAv(data)
 %   data = A single spike train vector where each entry is the timepoint at
 %       occurence of a spike
     
+    outPut = struct();
     %Divide the data series into segments of equal duration 
     numOfEqualSegs = 40;
     %Round down to the first time entry of the data series
@@ -48,4 +49,17 @@ function statAvParam = statAv(data)
     %Output is StatAv Parm which is SD of mean of ISIs in numOfEqualSegs segments divided by
     %stdAllISIs.
     statAvParam = stdMeanIntervals/stdAllISIs;
+    
+    %output.splits tells you the start and end of each interval
+    outPut.splits = splits;
+    %outPut.statAvParam gives you the statAvParam for the spike train
+    outPut.statAvParam = statAvParam;
+    %outPut.stdAllISIs gives the standard deviation of all ISIs
+    outPut.stdAllISIs = stdAllISIs;
+    %outPut.ISIs outputs a vector of all the ISIs
+    outPut.ISIs = ISIs;
+    %outPut.meanInterval gives vector of means of ISIs for each segment
+    outPut.meanInterval = meanInterval;
+    %outPut.stdMeanIntervals gives you the std of the numOfEqualSegs means 
+    outPut.stdMeanIntervals = stdMeanIntervals;
 end
