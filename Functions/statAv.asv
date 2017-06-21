@@ -10,7 +10,7 @@ function result = statAv(data)
 %   data = A struct that has two fields.
 %       data.SPKC = single spike train vector where each entry is the timepoint at
 %       occurence of a spike
-%       data.end = timestamp at which spike recording stopped
+%       data.end = timestamp at which spike recording stopped    
     outPut = struct();
     %Divide the data series into segments of equal duration 
     numOfEqualSegs = 40;
@@ -69,5 +69,5 @@ function result = statAv(data)
     %outPut.stdMeanIntervals gives you the std of the numOfEqualSegs means 
     outPut.stdMeanIntervals = stdMeanIntervals;
     
-    result = outPut.stdAllISIs;
+    result = outPut.
 end
