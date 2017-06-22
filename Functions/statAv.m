@@ -45,12 +45,7 @@ function result = statAv(data)
     stdMeanIntervals = std(meanInterval);
     
     %Calculate the std of all ISIs
-    numISIs = length(data.SPKC) - 1;
-    ISIs = zeros(numISIs,1);
-    for l = 1:numISIs
-        ISIs(l) = data.SPKC(l+1) - data.SPKC(l);
-    end
-    stdAllISIs = std(ISIs);
+    stdAllISIs = allstdISI(data);
     
     %Output is StatAv Parm which is SD of mean of ISIs in numOfEqualSegs segments divided by
     %stdAllISIs.
@@ -62,12 +57,10 @@ function result = statAv(data)
     outPut.statAvParam = statAvParam;
     %outPut.stdAllISIs gives the standard deviation of all ISIs
     outPut.stdAllISIs = stdAllISIs;
-    %outPut.ISIs outputs a vector of all the ISIs
-    outPut.ISIs = ISIs;
     %outPut.meanInterval gives vector of means of ISIs for each segment
     outPut.meanInterval = meanInterval;
     %outPut.stdMeanIntervals gives you the std of the numOfEqualSegs means 
     outPut.stdMeanIntervals = stdMeanIntervals;
     
-    result = outPut.stdAllISIs;
+    result = outPut.statAvParam;
 end
