@@ -1,4 +1,4 @@
-function results = mapper(data,fxn)
+function output = mapper(data,fxn)
 %Chris Ki, June 2017, Gittis Lab
 %Mapper: Applies function (fxn) of your choice to the spike trains
 %   in data
@@ -47,9 +47,9 @@ function results = mapper(data,fxn)
    allNames = transpose(allNames);
    fid = fopen('results.csv','wt');
    %Writes results to results.csv file with corresponding name and result
-   headers = {'FileName', 'allISIstd', fxn};
+   headers = {'FileName,', 'allISIstd,', [fxn ',']};
    M = [headers; allNames, num2cell(stds), num2cell(results)];
-   results = M;
+   output = M;
    if fid > 0 
        %Writes column headers
        fprintf(fid,'%s %s %s \n', M{1,1}, M{1,2},  M{1,3});

@@ -32,8 +32,11 @@ function result = statAv(data)
     %Segment spike data into numOfEqualSegs equal segments based on intervals 
     meanInterval = zeros(numOfEqualSegs,1);
     for j = (1:numOfEqualSegs)
-       intervalData = data.SPKC(data.SPKC >= intervals(j,1) & data.SPKC < intervals(j,2));
+       intervalData = data.SPKC(data.SPKC >= intervals(j,1) & data.SPKC <= intervals(j,2));
        numISIsInt = length(intervalData) -1;
+       if numISIsInt <= 0
+           warning(['There is not enough data in the interval ' num2str(intervals(j,1)) 'to ' num2str(intervals(j,2))])
+       end
        intervalISIs = zeros(numISIsInt,1);
        %Calculate ISIs for each intervals
        for k = (1:numISIsInt)
@@ -41,12 +44,13 @@ function result = statAv(data)
        end
        meanInterval(j) = mean(intervalISIs);
     end
+    %to get rid of the NaN values
+    meanInterval = meanInterval(~isnan(meanInterval));
     %Standard deviation of the means of ISIs in the numOfEqualSegs segments
     stdMeanIntervals = std(meanInterval);
     
     %Calculate the std of all ISIs
     stdAllISIs = allstdISI(data);
-    
     %Output is StatAv Parm which is SD of mean of ISIs in numOfEqualSegs segments divided by
     %stdAllISIs.
     statAvParam = stdMeanIntervals/stdAllISIs;
