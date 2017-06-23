@@ -13,7 +13,7 @@ function result = statAv(data)
 %       data.end = timestamp at which spike recording stopped
     outPut = struct();
     %Divide the data series into segments of equal duration 
-    numOfEqualSegs = 40;
+    numOfEqualSegs = data.numOfEqualSegs;
     if numOfEqualSegs > length(data.SPKC)
         warning(['There are less than numOfEqualSegs = ' num2str(numOfEqualSegs) ' spikes in this spike train!'])
     end
@@ -35,7 +35,7 @@ function result = statAv(data)
        intervalData = data.SPKC(data.SPKC >= intervals(j,1) & data.SPKC <= intervals(j,2));
        numISIsInt = length(intervalData) -1;
        if numISIsInt <= 0
-           warning(['There is not enough data in the interval ' num2str(intervals(j,1)) 'to ' num2str(intervals(j,2))])
+           warning(['There is not enough data in the interval ' num2str(intervals(j,1)) ' to ' num2str(intervals(j,2))])
        end
        intervalISIs = zeros(numISIsInt,1);
        %Calculate ISIs for each intervals

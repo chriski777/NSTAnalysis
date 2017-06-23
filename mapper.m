@@ -39,6 +39,8 @@ function output = mapper(data,fxn)
    %Apply fxn to each of the spike trains in allTimeStamps
    for i = (1:totalResults)
        input = struct();
+       %for StatAv Parameter
+       input.numOfEqualSegs = 40;
        input.SPKC = allTimeStamps{i};
        input.end = allTimes(i);
        results(i) = fh(input);
