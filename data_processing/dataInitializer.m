@@ -7,6 +7,10 @@ function data = dataInitializer(type)
 %   type: A character vector that contains what type of Cell you would like
 %       to examine
 
+%Output Parameter
+%   data: data structure that contains output of open_data for specific
+%   cell types
+
 input = struct();
 input.type = type;
 switch lower(type)
@@ -345,17 +349,13 @@ switch lower(type)
             %2
             'AW070616aAWsorttt.pl2';
             'AW070616cAWsorttt.pl2';
-            'AW070616dAWsorttt.pl2';
             'AW070616eAWsorttt.pl2';
             'AW070616fAWsorttt.pl2';
             'AW070616gAWsorttt.pl2';
             'AW070616hAWsorttt.pl2';
-            'AW070616iAWsorttt.pl2';
-            'AW070616jAWsorttt.pl2';
             'AW070616kAWsorttt.pl2';
             'AW070616lAWsorttt.pl2';
             'AW070616mAWsorttt.pl2';
-            'AW070616nAWsorttt.pl2';
             'AW070616oAWsorttt.pl2';
             
             %3
@@ -380,9 +380,87 @@ switch lower(type)
             'AW121316zAWsorttt.pl2';
             'AW121316aaAWsorttt.pl2';
             'AW121316bbAWsorttt.pl2';
+            
+            %4
+            'AW121516aAWsorttt.pl2';
+            'AW121516bAWsorttt.pl2';
+            'AW121516cAWsorttt.pl2';
+            'AW121516dAWsorttt.pl2';
+            'AW121516eAWsorttt.pl2';
+            'AW121516fAWsorttt.pl2';
+            'AW121516gAWsorttt.pl2';
+            'AW121516hAWsorttt.pl2';
+            'AW121516rAWsorttt.pl2';
+            'AW121516sAWsorttt.pl2';
+            'AW121516tAWsorttt.pl2';
+            'AW121516uAWsorttt.pl2';
+            'AW121516vAWsorttt.pl2';
+            'AW121516wAWsorttt.pl2';
+            'AW121516xAWsorttt.pl2';
+            'AW121516yAWsorttt.pl2';
+            'AW121516zAWsorttt.pl2';
+            
+            %5
+            'AW121816aAWsorttt.pl2';
+            'AW121816bAWsorttt.pl2';
+            'AW121816cAWsorttt.pl2';
+            'AW121816dAWsorttt.pl2';
+            'AW121816eAWsorttt.pl2';
+            'AW121816fAWsorttt.pl2';
+            'AW121816gAWsorttt.pl2';
+            'AW121816hAWsorttt.pl2';
+            'AW121816iAWsorttt.pl2';
+            
+            %6
+            'AW122116aAWsorttt.pl2';
+            'AW122116bAWsorttt.pl2';
+            'AW122116cAWsorttt.pl2';
+            'AW122116dAWsorttt.pl2';
+            'AW122116eAWsorttt.pl2';
+            'AW122116fAWsorttt.pl2';
+            'AW122116gAWsorttt.pl2';
+            'AW122116hAWsorttt.pl2';
+            'AW122116iAWsorttt.pl2';
+            'AW122116jAWsorttt.pl2';
+            
+            'AW122116rAWsorttt.pl2';
+            'AW122116sAWsorttt.pl2';
+            'AW122116tAWsorttt.pl2';
+            'AW122116uAWsorttt.pl2';
+            'AW122116vAWsorttt.pl2';
+            'AW122116wAWsorttt.pl2';
+            'AW122116xAWsorttt.pl2';
+            'AW122116yAWsorttt.pl2';
+            'AW122116zAWsorttt.pl2';
+            
+            %7
+            'AW122216aAWsorttt.pl2';
+            'AW122216bAWsorttt.pl2';
+            'AW122216cAWsorttt.pl2';
+            'AW122216dAWsorttt.pl2';
+            'AW122216eAWsorttt.pl2';
+            'AW122216fAWsorttt.pl2';
+            'AW122216gAWsorttt.pl2';
+            'AW122216hAWsorttt.pl2';
+            'AW122216iAWsorttt.pl2';
+            'AW122216jAWsorttt.pl2';
+            
+            'AW122216rAWsorttt.pl2';
+            'AW122216sAWsorttt.pl2';
+            'AW122216tAWsorttt.pl2';
+            'AW122216uAWsorttt.pl2';
+            'AW122216vAWsorttt.pl2';
+            'AW122216wAWsorttt.pl2';
+            'AW122216xAWsorttt.pl2';
+            'AW122216yAWsorttt.pl2';
+            'AW122216zAWsorttt.pl2';
+            'AW122216aaAWsorttt.pl2';
             };
         input.animalcodes = [1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ...
-             2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 ...
-             3 3 3 3 3 3 3 3 3 3 3 3];
+             2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 ...
+             3 3 3 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 ...
+             4 4 4 4 4 4 4 4 4 5 5 5 5 5 5 5 5 5 ...
+             6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 ...
+             7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7];
         data = open_data(input);
 end

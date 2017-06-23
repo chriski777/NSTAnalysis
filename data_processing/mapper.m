@@ -37,6 +37,8 @@ function output = mapper(data,fxn)
    %Standard deviations vector is used as reference to make sure the
    %results match up with the spreadsheet.
    stds = zeros(totalResults,1);
+   spikes = zeros(totalResults,1);
+   times = zeros(totalResults,1);
    %Apply fxn to each of the spike trains in allTimeStamps
    for i = (1:totalResults)
        input = struct();
@@ -45,20 +47,22 @@ function output = mapper(data,fxn)
        input.SPKC = allTimeStamps{i};
        input.end = allTimes(i);
        results(i) = fh(input);
+       spikes(i) = length(input.SPKC);
+       times(i) = input.end;
        stds(i) = allstdISI(input);
    end
    allNames = transpose(allNames);
-   resFileName = sprintf('%sresults.csv', fileType);
+   resFileName = sprintf('%sResults.csv', fileType);
    fid = fopen(resFileName,'wt');
    %Writes results to results.csv file with corresponding name and result
-   headers = {'FileName,', 'allISIstd,', [fxn ',']};
-   M = [headers; allNames, num2cell(stds), num2cell(results)];
+   headers = {'FileName', 'Spikes', 'EndTimeStamp', 'allISIstd', [fxn]};
+   M = [headers; allNames, num2cell(spikes), num2cell(times), num2cell(stds), num2cell(results)];
    output = M;
    if fid > 0 
        %Writes column headers
-       fprintf(fid,'%s %s %s \n', M{1,1}, M{1,2},  M{1,3});
+       fprintf(fid,'%s, %s, %s, %s, %s\n', M{1,1}, M{1,2},  M{1,3}, M{1,4}, M{1,5});
        for k = 2:size(M,1)
-        fprintf(fid,'%s, %f, %f\n',M{k,1}, M{k,2},  M{k,3});
+        fprintf(fid,'%s, %d, %f, %f, %f\n',M{k,1}, M{k,2},  M{k,3}, M{k,4}, M{k,5});
        end
        fclose(fid);
    end
