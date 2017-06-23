@@ -1,5 +1,6 @@
 function c=getit(c)
-% like cell2mat but cell 2 smaller cell
+%getit : helper function that converts cells into smaller cells. Used mainl
+%       for data processing in mapper.
 if iscell(c)
     c = cellfun(@getit, c, 'UniformOutput', 0);
     c = cat(2,c{:});

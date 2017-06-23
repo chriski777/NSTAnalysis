@@ -17,6 +17,7 @@ function output = mapper(data,fxn)
    %Isolate the times of the different experiments, should be same length
    %    as allTimeStamps
    allTimes = [];
+   fileType = data.type;
    for i = 1:length(data.ts)
        allTimes = [allTimes,repelem([data.T(i)],length(data.ts{i}))];
        %Truncate the latter parts to remove extensions
@@ -47,7 +48,8 @@ function output = mapper(data,fxn)
        stds(i) = allstdISI(input);
    end
    allNames = transpose(allNames);
-   fid = fopen('results.csv','wt');
+   resFileName = sprintf('%sresults.csv', fileType);
+   fid = fopen(resFileName,'wt');
    %Writes results to results.csv file with corresponding name and result
    headers = {'FileName,', 'allISIstd,', [fxn ',']};
    M = [headers; allNames, num2cell(stds), num2cell(results)];
