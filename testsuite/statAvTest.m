@@ -1,3 +1,5 @@
+%Chris Ki, June 2017, Test Suite for statAv
+
 %% Test 1: odd length SPKC Train
 %Odd Length SPKC train 
 % make sure to set numofSegements = 2]
@@ -30,4 +32,13 @@ data.end = endTime;
 data.SPKC = oddLengthSPKC2;
 data.numOfEqualSegs = 2;
 result = statAv(data);
+assert(round(result,4) == 0);
+
+%% Test 4: Stationary Interval
+endTime = 3;
+statSPKC = [0.3 0.4 0.5 1.5 1.6 1.7 2.1 2.2 2.3];
+data4.end = endTime;
+data4.SPKC = statSPKC;
+data4.numOfEqualSegs = 3;
+result = statAv2(data4);
 assert(round(result,4) == 0);

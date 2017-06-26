@@ -332,10 +332,10 @@ switch lower(type)
             'AW062816aAWsorttt.pl2';
             'AW062816bAWsorttt.pl2';
             'AW062816cAWsorttt.pl2';
-            'AW062816dKMS.pl2';
-            'AW062816eKMS.pl2';
-            'AW062816fKMS.pl2';
-            'AW062816gKMS.pl2';
+            'AW062816dAWsorttt.pl2';
+            'AW062816eAWsorttt.pl2';
+            'AW062816fAWsorttt.pl2';
+            'AW062816gAWsorttt.pl2';
             'AW062816hAWsorttt.pl2';
             'AW062816iAWsorttt.pl2';
             'AW062816jAWsorttt.pl2';

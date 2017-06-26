@@ -52,7 +52,7 @@ function output = mapper(data,fxn)
        stds(i) = allstdISI(input);
    end
    allNames = transpose(allNames);
-   resFileName = sprintf('%sResults.csv', fileType);
+   resFileName = sprintf('%s Results.csv', fileType);
    fid = fopen(resFileName,'wt');
    %Writes results to results.csv file with corresponding name and result
    headers = {'FileName', 'Spikes', 'EndTimeStamp', 'allISIstd', [fxn]};
