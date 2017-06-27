@@ -40,10 +40,14 @@ function output = mapper(data,fxn)
    spikes = zeros(totalResults,1);
    times = zeros(totalResults,1);
    %Apply fxn to each of the spike trains in allTimeStamps
+   
+   %%FUNCTION FIELDS VERY IMPORTANT
    for i = (1:totalResults)
        input = struct();
        %for StatAv Parameter
        input.numOfEqualSegs = 40;
+       %for AppEntropy parameter
+       input.AppEnumISIs = 3000;
        input.SPKC = allTimeStamps{i};
        input.end = allTimes(i);
        results(i) = fh(input);
