@@ -4,7 +4,8 @@ function result = statAv(data)
 %   been adapted to follow the analysis conducted in "Nonlinear Anlaysis of Discharge
 %   patterns in monkey basal ganglia" (Wichmann 2006). The StatAv Parameter
 %   assesses the stationarity of the data stream. The closer to zero the
-%   StatAv Parameter is the more stationary the data series is.
+%   StatAv Parameter is the more stationary the data series is. This
+%   function implementation follows the method laid out by Pincus. 
 
 %Input Parameter
 %   data = A struct that has two fields.

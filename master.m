@@ -1,4 +1,4 @@
-function master(fxn)
+tfunction master(fxn)
 %Chris Ki, June 2017, Gittis Lab
 
 %Master function : Applies fxn to the total dataset. Outputs results of fxn

@@ -35,6 +35,7 @@ result = statAv(data);
 assert(round(result,4) == 0);
 
 %% Test 4: Stationary Interval
+% has constant mean and variance 
 endTime = 3;
 statSPKC = [0.3 0.4 0.5 1.5 1.6 1.7 2.1 2.2 2.3];
 data4.end = endTime;

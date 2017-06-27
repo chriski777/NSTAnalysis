@@ -9,7 +9,10 @@ function output = AppEntropy(data)
 %   SPKC = A single spike train vector where each entry is the timepoint at
 %       occurence of a spike
     % numSpikes is the n parameter of the ApEn Value
-    numSpikes = length(data.SPKC);
+    numSpikes = 3000;
+    
+    subsetSpikes = data.SPKC(1:3001);
+    
     % embedding dimension is represented as m
     m = 2;
     %

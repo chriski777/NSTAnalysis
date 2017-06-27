@@ -40,4 +40,4 @@ data4.end = endTime;
 data4.SPKC = statSPKC;
 data4.numOfEqualSegs = 3;
 result = statAv2(data4);
-assert(round(result,4) == 0);
+assert(round(result,4) == 1);
