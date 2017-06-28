@@ -10,9 +10,6 @@ function result = allstdISI(data)
 
     %Calculate the std of all ISIs
     numISIs = length(data.SPKC) - 1;
-    ISIs = zeros(numISIs,1);
-    for l = 1:numISIs
-        ISIs(l) = data.SPKC(l+1) - data.SPKC(l);
-    end
+    ISIs = ISIconverter(data.SPKC,length(data.SPKC)-1);
     stdAllISIs = std(ISIs);
     result = stdAllISIs;

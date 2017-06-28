@@ -38,11 +38,8 @@ function result = statAv(data)
        if numISIsInt <= 0
            warning(['There is not enough data in the interval ' num2str(intervals(j,1)) ' to ' num2str(intervals(j,2))])
        end
-       intervalISIs = zeros(numISIsInt,1);
        %Calculate ISIs for each intervals
-       for k = (1:numISIsInt)
-           intervalISIs(k) = intervalData(k+1) - intervalData(k);
-       end
+       intervalISIs = ISIconverter(intervalData,numISIsInt);
        meanInterval(j) = mean(intervalISIs);
     end
     %to get rid of the NaN values

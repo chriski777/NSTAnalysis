@@ -10,11 +10,11 @@ function master(fxn)
 
     addpath('Functions')
     %8x1 cells for the 8 types of data we have
-    typeNames = ['Acute,' 'Alpha-Syn,' 'Gradual 35%,' 'Gradual 65%,' ...
-        'Gradual,' 'Naive,' 'Unilateral Depleted,' 'Unilateral Intact'];
+%     typeNames = ['Acute,' 'Alpha-Syn,' 'Gradual 35%,' 'Gradual 65%,' ...
+%         'Gradual,' 'Naive,' 'Unilateral Depleted,' 'Unilateral Intact'];
     
-%     %TEST 
-%     typeNames = ['Naive'];
+    %TEST 
+    typeNames = ['Naive'];
     sepTypes = textscan(typeNames,'%s', 'Delimiter',',');
     cellTypes = sepTypes{:}; 
     numTypes = length(cellTypes);
