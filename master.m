@@ -14,7 +14,7 @@ function master(fxn)
 %         'Gradual,' 'Naive,' 'Unilateral Depleted,' 'Unilateral Intact'];
 %     
     %TEST 
-    typeNames = ['Acute'];
+    typeNames = ['Naive'];
     sepTypes = textscan(typeNames,'%s', 'Delimiter',',');
     cellTypes = sepTypes{:}; 
     numTypes = length(cellTypes);
