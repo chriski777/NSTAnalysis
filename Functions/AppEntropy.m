@@ -9,8 +9,11 @@ function output = AppEntropy(data)
 %   noise that is present in in-vivo recordings.
 %
 %   Input: 
-%       data = A struct with a single spike train vector where each entry is the timepoint at
-%       occurence of a spike
+%       data = A struct that MUST HAVE the following fields:
+%           data.AppEnumISIs = the fixed length of the data series you would like to examine.
+%               AppEntropy is dependent on the length of the data. 
+%           data.SPKC = Spike train vector where each entry is the timepoint at occurence of 
+%               a spike.
 
     % numISIs is the n parameter of the ApEn Value
     numISIs = data.AppEnumISIs;

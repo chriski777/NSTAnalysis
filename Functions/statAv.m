@@ -8,7 +8,7 @@ function result = statAv(data)
 %   function implementation follows the method laid out by Pincus. 
 
 %Input Parameter
-%   data = A struct that has two fields.
+%   data = A struct that MUST Have two fields.
 %       data.SPKC = single spike train vector where each entry is the timepoint at
 %       occurence of a spike
 %       data.end = timestamp at which spike recording stopped
