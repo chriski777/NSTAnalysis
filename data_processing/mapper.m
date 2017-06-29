@@ -49,7 +49,6 @@ function output = mapper(data,fxn)
        %for AppEntropy parameter
        input.AppEnumISIs = 4000;
        input.SPKC = allTimeStamps{i};
-       input.end = allTimes(i);
        results(i) = fh(input);
        spikes(i) = length(input.SPKC);
        times(i) = input.end;
