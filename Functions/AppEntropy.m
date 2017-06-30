@@ -24,7 +24,7 @@ function output = AppEntropy(data)
             subsetISIs(k) = data.SPKC(k+1) - data.SPKC(k);
         end
         % embedding dimension is represented as m
-        m = 3;
+        m = data.m;
         % comparison length should be 15% of SD of the subsetISIs
         r = 0.15* std(subsetISIs);
         %Initialize matrix for phi m

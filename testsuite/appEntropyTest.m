@@ -1,4 +1,4 @@
-%Chris Ki, June 2017, Test Suite for statAv2
+%Chris Ki, June 2017, Test Suite for appEntropy
 addpath('Functions')
 increments = [85 80 89];
 z(1) = 1;

@@ -47,8 +47,11 @@ function output = mapper(data,fxn)
        %for StatAv Parameter
        input.numOfEqualSegs = 40;
        %for AppEntropy parameter
-       input.AppEnumISIs = 4000;
+       input.AppEnumISIs = 1000;
+       input.m = 2;
+       input.shuffPop = 100;
        input.SPKC = allTimeStamps{i};
+       input.end = allTimes(i);
        results(i) = fh(input);
        spikes(i) = length(input.SPKC);
        times(i) = input.end;
