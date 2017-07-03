@@ -49,7 +49,7 @@ function output = shuffledApEn(data)
             outPutVector(k) = phi_AppEntHelper(m, numISIs ,x_matrix,r) - ...
                 phi_AppEntHelper(m+1, numISIs ,x_matrix2,r);
         end
-        output = median(outPutVector);
+        output = median(outPutVector);    
     else
         warning(['The length of the spike train is ' num2str(length(data.SPKC)) ...
             ' less than ' num2str(numISIs)])
