@@ -1,4 +1,4 @@
-function dApEnCalculator()
+function dApEn()
 %Chris Ki, June 2017, Gittis Lab
 %dApEnCalculator: Calculates  the dApEn which is given by ApEn_raw -
 %   ApEn_shuffled (Darbin, Soares, Wichmann 2006). A high dApEn indicates
@@ -11,7 +11,8 @@ function dApEnCalculator()
 %This function is used differently from the other functions. No data struct
 %   input is needed. You should only use this function AFTER calculating
 %   AppEntropy and shuffledApEn. Also, make sure that this function is run
-%   inside the Functions folder
+%   inside the Functions folder. This function should not be run from
+%   master. 
 
 %Lastly, please make sure to use the same M, N, and r parameters for
 %   shuffledApEn and AppEntropy.
@@ -35,8 +36,8 @@ function dApEnCalculator()
                 'are not equal. '];
             error(msg)
         end
-        if exist('..\results\dApEnCalculator', 'file') ~= 7
-            mkdir('..\results\dApEnCalculator')
+        if exist('..\results\dApEn', 'file') ~= 7
+            mkdir('..\results\dApEn')
         end
         for i = 1:numFiles1
             %Make sure both files correspond to the same model
@@ -68,8 +69,9 @@ function dApEnCalculator()
             column1 = [{'dApEn'};dApEn];
             column2 = [{'original/shuffled'};ratio];
             M = [cell1(:,(1:4)),column1, column2];
+            M(strcmp(M,' NaN')) = {NaN};
             %Writes file
-            fileName = ['..\results\dApEnCalculator\', dir1(i).name];
+            fileName = ['..\results\dApEn\', dir1(i).name];
             fid = fopen(fileName,'wt');
             if fid > 0
                %Writes column headers

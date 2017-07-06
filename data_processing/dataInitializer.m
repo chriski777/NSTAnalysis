@@ -37,7 +37,6 @@ switch lower(type)
          'AW033017_2iAWsorttt.pl2';
          'AW033017_2jAWsorttt.pl2';
          %3
-         'KM111315aAWsorttt-01.pl2';
          'KM111315bAWsorttt-01.pl2';
          'KM111315cAWsorttt-01.pl2';
          'KM111315dAWsorttt-01.pl2';
@@ -54,25 +53,29 @@ switch lower(type)
          'AW033117eAWsorttt.pl2';
          'AW033117fAWsorttt.pl2';
          'AW033117gAWsorttt.pl2';
-         'AW033117hAWsorttt.pl2';};
+         'AW033117hAWsorttt.pl2';
+         
+         %5
+         'AW051017bAWsorttt.pl2';
+         'AW051017cAWsorttt.pl2';
+         'AW051017dAWsorttt.pl2';
+         'AW051017eAWsorttt.pl2';
+         'AW051017fAWsorttt.pl2';
+         'AW051017gAWsorttt.pl2';
+         'AW051017hAWsorttt.pl2';
+         'AW051017iAWsorttt.pl2';
+         };
         input.animalcodes = [1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 ...
-            2 2 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4];
+            2 2 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 5 5 5 5 5 5 5 5];
         data = open_data(input);
     case 'acute'
         input.files = {
             %1
-            'AW112015aAWsorttt-01.pl2';
-            'AW112015bAWsorttt-01.pl2';
             'AW112015cAWsorttt-01.pl2';
             'AW112015dAWsorttt-01.pl2';
-            'AW112015fAWsorttt-01.pl2';
-            'AW112015gAWsorttt-01.pl2';
-            'AW112015hAWsorttt-01.pl2';
             'AW112015iAWsorttt-01.pl2';
             'AW112015jAWsorttt-01.pl2';
             'AW112015kAWsorttt-01.pl2';
-            'AW112015lAWsorttt-01.pl2';
-            'AW112015mAWsorttt-01.pl2';
             'AW112015nAWsorttt-01.pl2';
             'AW112015oAWsorttt-01.pl2';
             'AW112015pAWsorttt-01.pl2';
@@ -86,59 +89,40 @@ switch lower(type)
             %3 
             'KM090815c_4.094AWsorttt-01.pl2';
             'KM090815d_4.151AWsorttt-01.pl2';
-            'KM090815e_4.231AWsorttt-01.pl2';
-            'KM090815f_3.181AWsorttt-01.pl2';
-            'KM090815g_3.261AWsorttt-01.pl2';
-            'KM090815h_3.341AWsorttt-01.pl2';
-            'KM090815i_3.746AWsorttt-01.pl2';
-            'KM090815j_3.822AWsorttt-01.pl2';
-            'KM090815k_3.902AWsorttt-01.pl2';};
-        input.animalcodes = [1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ...
-            2 2 2 2 2 2 3 3 3 3 3 3 3 3 3];
+            'KM090815e_4.231AWsorttt-01.pl2'; }
+
+        input.animalcodes = [1 1 1 1 1 1 1 1 2 2 2 2 2 2 3 3 3 ];
         data = open_data(input);
     case 'unilateral intact'
         input.files = {
             %1
-            'AW030717aAWsorttt.pl2';
-            'AW030717bAWsorttt.pl2';
-            'AW030717cAWsorttt.pl2';
             'AW030717dAWsorttt.pl2';
             'AW030717eAWsorttt.pl2';
             'AW030717fAWsorttt.pl2';
             'AW030717gAWsorttt.pl2';
             'AW030717hAWsorttt.pl2';
             %2
-            'AW081616aAWsorttt.pl2';
-            'AW081616bAWsorttt.pl2';
-            'AW081616cAWsorttt.pl2';
-            'AW081616dAWsorttt.pl2';
-            'AW081616eAWsorttt.pl2';
-            %3
-            'AW081916sAWsorttt.pl2';
-            'AW081916tAWsorttt.pl2';
             'AW081916uAWsorttt.pl2';
             'AW081916vAWsorttt.pl2';
             'AW081916wAWsorttt.pl2';
             'AW081916xAWsorttt.pl2';
             'AW081916yAWsorttt.pl2';
             'AW081916zAWsorttt.pl2';
-            %4
-            'AW120716aAWsorttt.pl2';
-            'AW120716bAWsorttt.pl2';
-            'AW120716cAWsorttt.pl2';
+            %3
             'AW120716dAWsorttt.pl2';
             'AW120716eAWsorttt.pl2';
             'AW120716fAWsorttt.pl2';
             'AW120716gAWsorttt.pl2';
             'AW120716hAWsorttt.pl2';
+            %4
+            'KM081716oAWsorttt.pl2';
+            'KM081716pAWsorttt.pl2';
             };
-        input.animalcodes = [1 1 1 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3 3 3 3 ...
-            4 4 4 4 4 4 4 4];
+        input.animalcodes = [1 1 1 1 1 2 2 2 2 2 2 3 3 3 3 3 4 4];
         data = open_data(input);
     case 'gradual'
         input.files = {
             %1
-            'AW010716aAWsorttt-01.pl2';
             'AW010716bAWsorttt-01.pl2';
             'AW010716cAWsorttt-01.pl2';
             'AW010716dAWsorttt-01.pl2';
@@ -147,9 +131,6 @@ switch lower(type)
             'AW010716gAWsorttt-01.pl2';
             'AW010716hAWsorttt-01.pl2';
             %2
-            'AW112515aAWsorttt-01.pl2';
-            'AW112515bAWsorttt-01.pl2';
-            'AW112515cAWsorttt-01.pl2';
             'AW112515dAWsorttt-01.pl2';
             'AW112515eAWsorttt-01.pl2';
             'AW112515gAWsorttt-01.pl2';
@@ -157,25 +138,13 @@ switch lower(type)
             'AW112515iAWsorttt-01.pl2';
             'AW112515jAWsorttt-01.pl2';
             'AW112515kAWsorttt-01.pl2';
-            'AW112515lAWsorttt-01.pl2';
             'AW112515mAWsorttt-01.pl2';
-            'AW112515nAWsorttt.pl2';
-            'AW112515oAWsorttt.pl2';
-            'AW112515pAWsorttt.pl2';
-            'AW112515qAWsorttt.pl2';
-            'AW112515rAWsorttt.pl2';
-            'AW112515sAWsorttt.pl2';
-            'AW112515tAWsorttt.pl2';
             };
-        input.animalcodes = [1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 ...
-            2 2 2 2 2 2 2 2 2 2];
+        input.animalcodes = [1 1 1 1 1 1 1 2 2 2 2 2 2 2 2];
         data = open_data(input);
     case 'unilateral depleted'
         input.files = {
             %1
-            'AW030817aAWsorttt.pl2';
-            'AW030817bAWsorttt.pl2';
-            'AW030817cAWsorttt.pl2';
             'AW030817dAWsorttt.pl2';
             'AW030817eAWsorttt.pl2';
             'AW030817fAWsorttt.pl2';
@@ -189,17 +158,8 @@ switch lower(type)
             'AW081216cAWsorttt.pl2';
             'AW081216dAWsorttt.pl2';
             'AW081216eAWsorttt.pl2';
-            'AW081216fAWsorttt.pl2';
-            'AW081216gAWsorttt.pl2';
             
             %3
-            'AW081916aAWsorttt.pl2';
-            'AW081916bAWsorttt.pl2';
-            'AW081916cAWsorttt.pl2';
-            'AW081916dAWsorttt.pl2';
-            'AW081916eAWsorttt.pl2';
-            'AW081916fAWsorttt.pl2';
-            'AW081916gAWsorttt.pl2';
             'AW081916hAWsorttt.pl2';
             'AW081916iAWsorttt.pl2';
             'AW081916jAWsorttt.pl2';
@@ -207,41 +167,21 @@ switch lower(type)
             'AW081916lAWsorttt.pl2';
             'AW081916mAWsorttt.pl2';
             
-            %4
-            'AW120716rAWsorttt.pl2';
-            'AW120716sAWsorttt.pl2';
-            'AW120716tAWsorttt.pl2';
-            'AW120716uAWsorttt.pl2';
-            'AW120716vAWsorttt.pl2';
-            'AW120716wAWsorttt.pl2';
-            'AW120716xAWsorttt.pl2';
-            'AW120716yAWsorttt.pl2';
-            'AW120716zAWsorttt.pl2';
-            'AW120716aaAWsorttt.pl2';
-            
-            %5 
-            'AW120816aAWsorttt.pl2';
-            'AW120816bAWsorttt.pl2';
-            'AW120816cAWsorttt.pl2';
-            'AW120816dAWsorttt.pl2';
-            'AW120816eAWsorttt.pl2';
+            %4 
             'AW120816fAWsorttt.pl2';
             'AW120816gAWsorttt.pl2';
             'AW120816hAWsorttt.pl2';
             
-            %6
-            'KM081716aAWsorttt.pl2';
-            'KM081716bAWsorttt.pl2';
+            %5
             'KM081716cAWsorttt.pl2';
             'KM081716dAWsorttt.pl2';
             'KM081716eAWsorttt.pl2';
             'KM081716fAWsorttt.pl2';
             'KM081716gAWsorttt.pl2';
-            'KM081716hAWsorttt.pl2';
             'KM081716iAWsorttt.pl2';
             'KM081716jAWsorttt.pl2';
             
-            %7
+            %6
             'AW042417bAWsorttt.pl2';
             'AW042417cAWsorttt.pl2';
             'AW042417dAWsorttt.pl2';
@@ -251,38 +191,30 @@ switch lower(type)
             'AW042417hAWsorttt.pl2';
             'AW042417iAWsorttt.pl2';
             };  
-        input.animalcodes = [1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 3 3 3 3 ...
-            3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 5 5 5 5 5 5 5 5 ....
-            6 6 6 6 6 6 6 6 6 6 7 7 7 7 7 7 7 7];
+        input.animalcodes = [1 1 1 1 1 1 1 2 2 2 2 3 3 3 3 3 3 4 4 4 ...
+            5 5 5 5 5 5 5 6 6 6 6 6 6 6 6];
         data = open_data(input);
     case 'gradual 35%'
         input.files = {
             %1
-            'AW012916aAWsorttt.pl2';
-            'AW012916bAWsorttt.pl2';
-            'AW012916cAWsorttt.pl2';
-            'AW012916dAWsorttt.pl2';
             'AW012916eAWsorttt.pl2';
             'AW012916fAWsorttt.pl2';
             'AW012916gAWsorttt.pl2';
             'AW012916hAWsorttt.pl2';
             
             %2
-            'AW120115aAWsorttt-01.pl2';
             'AW120115bAWsorttt-01.pl2';
             'AW120115cAWsorttt-01.pl2';
             'AW120115dAWsorttt-01.pl2';
             'AW120115eAWsorttt-01.pl2';
             'AW120115fAWsorttt-01.pl2';
-            'AW120115gAWsorttt-01.pl2';
             'AW120115hAWsorttt.pl2';
             'AW120115iAWsorttt.pl2';
             'AW120115jAWsorttt.pl2';
             'AW120115kAWsorttt.pl2';
             'AW120115lAWsorttt.pl2';
             };
-        input.animalcodes = [1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 ...
-            2 2 2 2];
+        input.animalcodes = [1 1 1 1 2 2 2 2 2 2 2 2 2 2];
         data = open_data(input);
     case 'gradual 65%'     
         input.files = {
@@ -292,25 +224,16 @@ switch lower(type)
             'AW081116cAWsorttt.pl2';
             'AW081116dAWsorttt.pl2';
             'AW081116eAWsorttt.pl2';
-            'AW081116fAWsorttt.pl2';
-            'AW081116gAWsorttt.pl2';
-            'AW081116hAWsorttt.pl2';
-            'AW081116iAWsorttt.pl2';
             'AW081116jAWsorttt.pl2';
             'AW081116kAWsorttt.pl2';
             'AW081116lAWsorttt.pl2';
             'AW081116mAWsorttt.pl2';
             'AW081116nAWsorttt.pl2';
             'AW081116oAWsorttt.pl2';
-            'AW081116pAWsorttt.pl2';
-            'AW081116qAWsorttt.pl2';
-            
             %2
             'AW092216aAWsorttt.pl2';
             'AW092216bAWsorttt.pl2';
             'AW092216cAWsorttt.pl2';
-            'AW092216dAWsorttt.pl2';
-            'AW092216eAWsorttt.pl2';
             'AW092216fAWsorttt.pl2';
             'AW092216gAWsorttt.pl2';
             'AW092216hAWsorttt.pl2';
@@ -318,13 +241,10 @@ switch lower(type)
             'AW092216jAWsorttt.pl2';
             'AW092216kAWsorttt.pl2';
             'AW092216lAWsorttt.pl2';
-            'AW092216mAWsorttt.pl2';
-            'AW092216nAWsorttt.pl2';
-            'AW092216oAWsorttt.pl2';
-            'AW092216qAWsorttt.pl2';
+
             };
-        input.animalcodes = [1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ...
-            2 2 2 2 2 2 2 2 2 2 2 2 2 2 2  2];
+        input.animalcodes = [1 1 1 1 1 1 1 1 1 1 1 ...
+            2 2 2 2 2 2 2 2 2 2];
         data = open_data(input);
     case 'alpha-syn'
         input.files = {
@@ -338,50 +258,8 @@ switch lower(type)
             'AW062816gAWsorttt.pl2';
             'AW062816hAWsorttt.pl2';
             'AW062816iAWsorttt.pl2';
-            'AW062816jAWsorttt.pl2';
-            'AW062816kAWsorttt.pl2';
-            'AW062816lAWsorttt.pl2';
-            'AW062816mAWsorttt.pl2';
-            'AW062816nAWsorttt.pl2';
-            'AW062816oAWsorttt.pl2';
-            'AW062816pAWsorttt.pl2';
             
             %2
-            'AW070616aAWsorttt.pl2';
-            'AW070616cAWsorttt.pl2';
-            'AW070616eAWsorttt.pl2';
-            'AW070616fAWsorttt.pl2';
-            'AW070616gAWsorttt.pl2';
-            'AW070616hAWsorttt.pl2';
-            'AW070616kAWsorttt.pl2';
-            'AW070616lAWsorttt.pl2';
-            'AW070616mAWsorttt.pl2';
-            'AW070616oAWsorttt.pl2';
-            
-            %3
-            'AW121316aAWsorttt.pl2';
-            'AW121316bAWsorttt.pl2';
-            'AW121316cAWsorttt.pl2';
-            'AW121316dAWsorttt.pl2';
-            'AW121316eAWsorttt.pl2';
-            'AW121316fAWsorttt.pl2';
-            'AW121316gAWsorttt.pl2';
-            'AW121316hAWsorttt.pl2';
-            'AW121316iAWsorttt.pl2';
-            'AW121316jAWsorttt.pl2';
-            'AW121316kAWsorttt.pl2';
-            'AW121316sAWsorttt.pl2';
-            'AW121316tAWsorttt.pl2';
-            'AW121316uAWsorttt.pl2';
-            'AW121316vAWsorttt.pl2';
-            'AW121316wAWsorttt.pl2';
-            'AW121316xAWsorttt.pl2';
-            'AW121316yAWsorttt.pl2';
-            'AW121316zAWsorttt.pl2';
-            'AW121316aaAWsorttt.pl2';
-            'AW121316bbAWsorttt.pl2';
-            
-            %4
             'AW121516aAWsorttt.pl2';
             'AW121516bAWsorttt.pl2';
             'AW121516cAWsorttt.pl2';
@@ -399,43 +277,8 @@ switch lower(type)
             'AW121516xAWsorttt.pl2';
             'AW121516yAWsorttt.pl2';
             'AW121516zAWsorttt.pl2';
-            
-            %5
-            'AW121816aAWsorttt.pl2';
-            'AW121816bAWsorttt.pl2';
-            'AW121816cAWsorttt.pl2';
-            'AW121816dAWsorttt.pl2';
-            'AW121816eAWsorttt.pl2';
-            'AW121816fAWsorttt.pl2';
-            'AW121816gAWsorttt.pl2';
-            'AW121816hAWsorttt.pl2';
-            'AW121816iAWsorttt.pl2';
-            
-            %6
-            'AW122116aAWsorttt.pl2';
-            'AW122116bAWsorttt.pl2';
-            'AW122116cAWsorttt.pl2';
-            'AW122116dAWsorttt.pl2';
-            'AW122116eAWsorttt.pl2';
-            'AW122116fAWsorttt.pl2';
-            'AW122116gAWsorttt.pl2';
-            'AW122116hAWsorttt.pl2';
-            'AW122116iAWsorttt.pl2';
-            'AW122116jAWsorttt.pl2';
-            
-            'AW122116rAWsorttt.pl2';
-            'AW122116sAWsorttt.pl2';
-            'AW122116tAWsorttt.pl2';
-            'AW122116uAWsorttt.pl2';
-            'AW122116vAWsorttt.pl2';
-            'AW122116wAWsorttt.pl2';
-            'AW122116xAWsorttt.pl2';
-            'AW122116yAWsorttt.pl2';
-            'AW122116zAWsorttt.pl2';
-            
-            %7
-            'AW122216aAWsorttt.pl2';
-            'AW122216bAWsorttt.pl2';
+            %3
+            'AW122216aaAWsorttt.pl2';
             'AW122216cAWsorttt.pl2';
             'AW122216dAWsorttt.pl2';
             'AW122216eAWsorttt.pl2';
@@ -444,23 +287,30 @@ switch lower(type)
             'AW122216hAWsorttt.pl2';
             'AW122216iAWsorttt.pl2';
             'AW122216jAWsorttt.pl2';
-            
-            'AW122216rAWsorttt.pl2';
-            'AW122216sAWsorttt.pl2';
-            'AW122216tAWsorttt.pl2';
             'AW122216uAWsorttt.pl2';
             'AW122216vAWsorttt.pl2';
             'AW122216wAWsorttt.pl2';
             'AW122216xAWsorttt.pl2';
             'AW122216yAWsorttt.pl2';
             'AW122216zAWsorttt.pl2';
-            'AW122216aaAWsorttt.pl2';
+            
+            %4
+            'AW070616aAWsorttt.pl2';
+            'AW070616cAWsorttt.pl2';
+            'AW070616eAWsorttt.pl2';
+            'AW070616fAWsorttt.pl2';
+            'AW070616gAWsorttt.pl2';
+            'AW070616hAWsorttt.pl2';
+            'AW070616kAWsorttt.pl2';
+            'AW070616lAWsorttt.pl2';
+            'AW070616mAWsorttt.pl2';
+            'AW070616nAWsorttt.pl2';
+            'AW070616oAWsorttt.pl2';
+            
             };
-        input.animalcodes = [1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ...
-             2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 ...
-             3 3 3 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 ...
-             4 4 4 4 4 4 4 4 4 5 5 5 5 5 5 5 5 5 ...
-             6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 ...
-             7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7];
+        input.animalcodes = [1 1 1 1 1 1 1 1 1 ...
+             2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 ...
+             3 3 3 3 3 3 3 3 3 3 3 3 3 3 3  ...
+             4 4 4 4 4 4 4 4 4 4 4];
         data = open_data(input);
 end
