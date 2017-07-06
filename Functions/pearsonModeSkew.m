@@ -8,11 +8,12 @@ function result = pearsonModeSkew(data)
 %data = A struct that has two fields.
 %       data.SPKC = single spike train vector where each entry is the timepoint at
 %       occurence of a spike
-
     ISIs = ISIconverter(data.SPKC,length(data.SPKC)-1);
     stdAllISIs = std(ISIs);
     meanAllISIs = mean(ISIs);
-    modeAllISIs = mode(ISIs)
+    hist =  histogram(ISIs, 'BinWidth', 0.005);
+    [~, index] = max(hist.Values);
+    modeAllISIs = (index*0.005 + (index-1)*0.005)/2; 
     result = (meanAllISIs - modeAllISIs)/stdAllISIs;
 end
 
