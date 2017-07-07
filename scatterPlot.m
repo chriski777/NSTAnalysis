@@ -13,6 +13,7 @@ function scatterPlot(fxn1,fxn2)
         if numFiles2 == 0 
             error(['There are not any results in the ', fxn2, ' directory.'])
         end 
+        figure
         for i = 1:numFiles1
             %directory1 name can be the same as the same results are read
              fileName1 = ['results\', fxn1,'\', directory1(i).name];
@@ -29,8 +30,9 @@ function scatterPlot(fxn1,fxn2)
              secCol(strcmp(secCol,' NaN')) = {NaN};
              x_y = cell2mat([firstCol, secCol]);
              x_y = x_y(~any(isnan(x_y),2),:);
+             directory1(i).name
              median(x_y(:,1))
-             figure(i)
+             subplot(4,2,i)   
              scatter(x_y(:,1), x_y(:,2))
              xlabel(fxn1);
              ylabel(fxn2);
