@@ -1,4 +1,4 @@
-function output = mapper(data,fxn)
+function output = mapper(data,fxn,movement)
 %Chris Ki, June 2017, Gittis Lab
 %Mapper: Applies function (fxn) of your choice to the spike trains
 %   in data
@@ -50,12 +50,20 @@ function output = mapper(data,fxn)
        input.AppEnumISIs = 1000;
        input.m = 2;
        input.shuffPop = 100;
-       input.SPKC = allTimeStamps{i};
-       input.end = allTimes(i);
-       results(i) = fh(input);
-       spikes(i) = length(input.SPKC);
+       input.movet_rs  = data.movet_rs{i};
+       input.moving_rs = data.moving_rs{i};
+       input.fileName = data.files{i}; 
+       %FILTER OUT MOVEMENTS HERE
+       if movement == -1 || movement == 1
+           %for movement 
+       else
+        input.SPKC = allTimeStamps{i};
+        input.end = allTimes(i);
+        results(i) = fh(input);
+        spikes(i) = length(input.SPKC);
+        stds(i) = allstdISI(input);
+       end
        times(i) = input.end;
-       stds(i) = allstdISI(input);
    end
    allNames = transpose(allNames);
    resFileName = sprintf('%s Results.csv', fileType);
