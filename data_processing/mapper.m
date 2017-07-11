@@ -39,8 +39,20 @@ function output = mapper(data,fxn,movement)
    stds = zeros(totalResults,1);
    spikes = zeros(totalResults,1);
    times = zeros(totalResults,1);
+   %Repeat the movements and fileNames
+   allMovements = cell(totalResults,1);
+   allMTimes = cell(totalResults,1);
+   %Repeat the movements and fileNames
+   startIndex = 1;
+   for i = 1:length(data.ts)
+    endIndex = startIndex + length(data.ts{i}) - 1;
+    for j = startIndex:endIndex
+        allMTimes(j,1) = data.movet_rs(i);
+        allMovements(j,1) = data.moving_rs(i);
+    end
+    startIndex = endIndex + 1;
+   end
    %Apply fxn to each of the spike trains in allTimeStamps
-   
    %%FUNCTION FIELDS VERY IMPORTANT
    for i = (1:totalResults)
        input = struct();
@@ -50,19 +62,16 @@ function output = mapper(data,fxn,movement)
        input.AppEnumISIs = 1000;
        input.m = 2;
        input.shuffPop = 100;
-       input.movet_rs  = data.movet_rs{i};
-       input.moving_rs = data.moving_rs{i};
-       input.fileName = data.files{i}; 
-       %FILTER OUT MOVEMENTS HERE
-       if movement == -1 || movement == 1
-           %for movement 
-       else
-        input.SPKC = allTimeStamps{i};
-        input.end = allTimes(i);
-        results(i) = fh(input);
-        spikes(i) = length(input.SPKC);
-        stds(i) = allstdISI(input);
-       end
+       %For SDF 
+       input.iteration = i;
+       input.movet_rs  = allMTimes{i};
+       input.moving_rs = allMovements{i};
+       input.fileName = allNames(i); 
+       input.SPKC = allTimeStamps{i};
+       input.end = allTimes(i);
+       results(i) = fh(input);
+       spikes(i) = length(input.SPKC);
+       stds(i) = allstdISI(input);
        times(i) = input.end;
    end
    allNames = transpose(allNames);
