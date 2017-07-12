@@ -229,7 +229,7 @@ for f = 1:data.nfiles
         % movex = time of each mvmt smapling, movey = velocity at time,
         % movedur = length of mvmt recording
         mvtol = 0.5; % frac of mvmt bout which must be moving to consider mvmt
-        mvlen = 1.5; % minimum length to consider movement (sec)
+        mvlen = 2.0; % minimum length to consider movement (sec)
         [movet,movey] = loadMoveFile(filename_trunc); % loads associated movement file
         disp('loaded')
         movet = movet-movet(1)+movestart;
