@@ -1,4 +1,4 @@
-function output = mapper(data,fxn,movement)
+function output = mapper(data,fxn,movement,graph)
 %Chris Ki, June 2017, Gittis Lab
 %Mapper: Applies function (fxn) of your choice to the spike trains
 %   in data
@@ -52,9 +52,19 @@ function output = mapper(data,fxn,movement)
     end
     startIndex = endIndex + 1;
    end
+   if logical(graph)
+      counter = 0;
+   end
    %Apply fxn to each of the spike trains in allTimeStamps
    %%FUNCTION FIELDS VERY IMPORTANT
    for i = (1:totalResults)
+       %For Graphs
+       if logical(graph)
+          if mod(i-1,4) == 0
+            counter = counter+1;
+            figure(counter)
+          end
+       end
        input = struct();
        %for StatAv Parameter
        input.numOfEqualSegs = 40;
@@ -62,10 +72,13 @@ function output = mapper(data,fxn,movement)
        input.AppEnumISIs = 1000;
        input.m = 2;
        input.shuffPop = 100;
+ 
        %For SDF 
        input.iteration = i;
        input.movet_rs  = allMTimes{i};
        input.moving_rs = allMovements{i};
+       
+       input.type = data.type;
        input.fileName = allNames(i); 
        input.SPKC = allTimeStamps{i};
        input.end = allTimes(i);

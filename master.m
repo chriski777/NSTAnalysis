@@ -20,8 +20,22 @@ function master(fxn, dataTypes,movement)
         typeNames = ['Acute,' 'Alpha-Syn,' 'Gradual 35%,' 'Gradual 65%,' ...
             'Gradual,' 'Naive,' 'Unilateral Depleted,' 'Unilateral Intact'];
     elseif strcmpi(dataTypes,'test')
-        %TEST 
-        typeNames = ['Naive'];        
+        %Naive
+        typeNames = ['Naive'];   
+    elseif strcmpi(dataTypes,'Acute')
+        typeNames = ['Acute'];  
+    elseif strcmpi(dataTypes,'Alpha-Syn')
+        typeNames = ['Alpha-Syn'];  
+    elseif strcmpi(dataTypes, 'Gradual 35%')
+        typeNames = ['Gradual 35%'];
+    elseif strcmpi(dataTypes, 'Gradual 65%')
+        typeNames = ['Gradual 65%'];
+    elseif strcmpi(dataTypes, 'Gradual')
+        typeNames = ['Gradual'];
+    elseif strcmpi(dataTypes, 'Unilateral Depleted')
+        typeNames = ['Unilateral Depleted'];
+    elseif strcmpi(dataTypes, 'Unilateral Intact')
+        typeNames = ['Unilateral Intact'];        
     else 
         error('Invalid dataTypes parameter. Please select either TEST or FULL.')
     end    
@@ -46,7 +60,11 @@ function master(fxn, dataTypes,movement)
         for i = 1: numTypes
             currType = cellTypes{i};
             data = dataInitializer(currType);
-            mapper(data,fxn,movement);
+            if strcmpi(fxn,'spikedensityfunction')
+               mapper(data,fxn,movement,1); 
+            else
+               mapper(data,fxn,movement,0);
+            end
         end
     else
         error('That is not a valid custom function.')
