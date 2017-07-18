@@ -14,9 +14,10 @@ function intervalSPK = rasterPlot(data)
     intervalSPK = data.SPKC((data.SPKC >= firstTimeStamp) & data.SPKC <= endTimeStamp);
     nSpikes = length(intervalSPK);
     for i = 1:nSpikes
-        line([intervalSPK(i), intervalSPK(i)],[0,1],'Color','k');
+        line([intervalSPK(i), intervalSPK(i)],[0,0.2],'Color','k');
     end
+    ylim([0,1])
     set(gca, 'YTick', []);
-    xlabel('Time (ms)'); % Time is in millisecond
-    title(['Raster Plot from time ' num2str(firstTimeStamp) 'ms to ' num2str(endTimeStamp) 'ms']);
+    xlabel('Time (s)'); % Time is in second
+    title(['Raster Plot from time ' num2str(firstTimeStamp) 's to ' num2str(endTimeStamp) 's']);
 end

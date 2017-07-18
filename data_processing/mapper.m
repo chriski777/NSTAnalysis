@@ -93,12 +93,12 @@ function output = mapper(data,fxn,movement,graph)
    fid = fopen(resFileName,'wt');
    
    %Writes results to results.csv file with corresponding name and result
-   data.
+   
    %typeCell = typeAssign('classifications.xlsx',fileType);
    headers = {'FileName', 'Spikes', 'EndTimeStamp', 'allISIstd', [fxn]};   
-   N = [headers; allNames, num2cell(spikes), num2cell(times), num2cell(stds), num2cell(results)];
+   M = [headers; allNames, num2cell(spikes), num2cell(times), num2cell(stds), num2cell(results)];
    %M = combineType(typeCell,N);
-   output = N;
+   output = M;
    if fid > 0 
        %Writes column headers
        fprintf(fid,'%s, %s, %s, %s, %s\n', M{1,1}, M{1,2},  M{1,3}, M{1,4}, M{1,5});

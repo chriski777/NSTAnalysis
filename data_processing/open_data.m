@@ -230,7 +230,10 @@ for f = 1:data.nfiles
         % movedur = length of mvmt recording
         mvtol = 0.5; % frac of mvmt bout which must be moving to consider mvmt
         mvlen = 2.0; % minimum length to consider movement (sec)
-        
+        currIndex = findstr(filename_trunc, '.');
+        if ~isempty(currIndex)
+            filename_trunc = [filename_trunc, '.'];
+        end
         [movet,movey] = loadMoveFile(filename_trunc); % loads associated movement file
         disp('loaded')
         movet = movet-movet(1)+movestart;
@@ -238,7 +241,6 @@ for f = 1:data.nfiles
         movey = movey(1:length(movet));
         [~, moving] = detectMove(movet,movey,mvtol,mvlen);
         [movexrs, moveyrs] = resampleMove(movet,moving,1000);
-        
         data.movet_raw{f} = movet;
         data.movey_raw{f} = movey;
         data.movet_rs{f} = movexrs;
