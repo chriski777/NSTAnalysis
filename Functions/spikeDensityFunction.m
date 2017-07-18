@@ -44,8 +44,8 @@ function result = spikeDensityFunction(data)
             
             %check each onset/offset value to make sure time preceding movement
             %   is not a negative index
-            offSets = offSets((onSets + 1 - beforeOnS*1000) > 0);
-            onSets = onSets((onSets + 1 - beforeOnS*1000) > 0);
+            offSets = offSets((onSets + 1 - beforeOnS*1000- (lo + stdeviation*3)*1000) > 0);
+            onSets = onSets((onSets + 1 - beforeOnS*1000- (lo + stdeviation*3)*1000) > 0);
             
             %Make sure time before onSet is no movement
             toDelete = zeros(1,length(onSets));

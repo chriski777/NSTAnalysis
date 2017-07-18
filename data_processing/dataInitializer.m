@@ -73,22 +73,22 @@ switch lower(type)
             %1
             'AW112015cAWsorttt-01.pl2';
             'AW112015dAWsorttt-01.pl2';
-%             'AW112015iAWsorttt-01.pl2';
-%             'AW112015jAWsorttt-01.pl2';
-%             'AW112015kAWsorttt-01.pl2';
-%             'AW112015nAWsorttt-01.pl2';
-%             'AW112015oAWsorttt-01.pl2';
-%             'AW112015pAWsorttt-01.pl2';
-%             %2
-%             'KM011116aAWsorttt-01.pl2';
-%             'KM011116bAWsorttt-01.pl2';
-%             'KM011116cAWsorttt-01.pl2';
-%             'KM011116dAWsorttt-01.pl2';
-%             'KM011116eAWsorttt-01.pl2';
-%             'KM011116fAWsorttt-01.pl2';
-%             %3 
-%             'KM090815c_4.094AWsorttt-01.pl2';
-%             'KM090815d_4.151AWsorttt-01.pl2';
+            'AW112015iAWsorttt-01.pl2';
+            'AW112015jAWsorttt-01.pl2';
+            'AW112015kAWsorttt-01.pl2';
+            'AW112015nAWsorttt-01.pl2';
+            'AW112015oAWsorttt-01.pl2';
+            'AW112015pAWsorttt-01.pl2';
+            %2
+            'KM011116aAWsorttt-01.pl2';
+            'KM011116bAWsorttt-01.pl2';
+            'KM011116cAWsorttt-01.pl2';
+            'KM011116dAWsorttt-01.pl2';
+            'KM011116eAWsorttt-01.pl2';
+            'KM011116fAWsorttt-01.pl2';
+            %3 
+            'KM090815c_4.094AWsorttt-01.pl2';
+            'KM090815d_4.151AWsorttt-01.pl2';
             'KM090815e_4.231AWsorttt-01.pl2'; };
 
         input.animalcodes = [1 1 1 1 1 1 1 1 2 2 2 2 2 2 3 3 3 ];
@@ -273,10 +273,10 @@ switch lower(type)
             'AW121516tAWsorttt.pl2';
             'AW121516uAWsorttt.pl2';
             'AW121516vAWsorttt.pl2';
-            'AW121516wAWsorttt.pl2';
-            'AW121516xAWsorttt.pl2';
-            'AW121516yAWsorttt.pl2';
-            'AW121516zAWsorttt.pl2';
+           'AW121516wAWsorttt.pl2';
+           'AW121516xAWsorttt.pl2';
+           'AW121516yAWsorttt.pl2';
+           'AW121516zAWsorttt.pl2';
             %3
             'AW122216aaAWsorttt.pl2';
             'AW122216cAWsorttt.pl2';
