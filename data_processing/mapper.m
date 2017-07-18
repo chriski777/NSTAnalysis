@@ -55,6 +55,7 @@ function output = mapper(data,fxn,movement,graph)
    if logical(graph)
       counter = 0;
    end
+   
    %Apply fxn to each of the spike trains in allTimeStamps
    %%FUNCTION FIELDS VERY IMPORTANT
    for i = (1:totalResults)
@@ -90,10 +91,14 @@ function output = mapper(data,fxn,movement,graph)
    allNames = transpose(allNames);
    resFileName = sprintf('%s Results.csv', fileType);
    fid = fopen(resFileName,'wt');
+   
    %Writes results to results.csv file with corresponding name and result
-   headers = {'FileName', 'Spikes', 'EndTimeStamp', 'allISIstd', [fxn]};
-   M = [headers; allNames, num2cell(spikes), num2cell(times), num2cell(stds), num2cell(results)];
-   output = M;
+   data.
+   %typeCell = typeAssign('classifications.xlsx',fileType);
+   headers = {'FileName', 'Spikes', 'EndTimeStamp', 'allISIstd', [fxn]};   
+   N = [headers; allNames, num2cell(spikes), num2cell(times), num2cell(stds), num2cell(results)];
+   %M = combineType(typeCell,N);
+   output = N;
    if fid > 0 
        %Writes column headers
        fprintf(fid,'%s, %s, %s, %s, %s\n', M{1,1}, M{1,2},  M{1,3}, M{1,4}, M{1,5});

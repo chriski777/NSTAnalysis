@@ -21,7 +21,7 @@ function master(fxn, dataTypes,movement)
             'Gradual,' 'Naive,' 'Unilateral Depleted,' 'Unilateral Intact'];
     elseif strcmpi(dataTypes,'test')
         %Naive
-        typeNames = ['Naive'];   
+        typeNames = ['test'];   
     elseif strcmpi(dataTypes,'Acute')
         typeNames = ['Acute'];  
     elseif strcmpi(dataTypes,'Alpha-Syn')
@@ -35,7 +35,9 @@ function master(fxn, dataTypes,movement)
     elseif strcmpi(dataTypes, 'Unilateral Depleted')
         typeNames = ['Unilateral Depleted'];
     elseif strcmpi(dataTypes, 'Unilateral Intact')
-        typeNames = ['Unilateral Intact'];        
+        typeNames = ['Unilateral Intact'];
+    elseif strcmpi(dataTypes, 'Naive')
+        typeNames = ['Naive'];
     else 
         error('Invalid dataTypes parameter. Please select either TEST or FULL.')
     end    

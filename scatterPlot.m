@@ -32,12 +32,13 @@ function scatterPlot(fxn1,fxn2)
              x_y = x_y(~any(isnan(x_y),2),:);
              directory1(i).name
              median(x_y(:,1))
-             subplot(4,2,i)   
+             axes(i) = subplot(4,2,i);   
              scatter(x_y(:,1), x_y(:,2))
              xlabel(fxn1);
              ylabel(fxn2);
              title([fxn1 ' vs. ' fxn2 ' for ' directory1(i).name]);
         end
+        linkaxes(axes)
     else
         error(['There exists no results for this fxn. Please make sure to ' , ... 
             'run the functions and have the results before using the extract ', ...

@@ -41,7 +41,7 @@ multilight = 0; % 1 if multiple light sources, e.g. switched color during file
 data = struct();
 data.type = input.type;
 data.files = files;
-data.files_trunc = cellfun(@(x) x(1:9),files,'UniformOutput',0);
+data.files_trunc = cellfun(@selectStr,files,'UniformOutput',0);
 data.nfiles = length(files);
 data.animalcodes = animalcodes;
 data.LFP_FS = 1000; % LFP samp freq
@@ -230,6 +230,7 @@ for f = 1:data.nfiles
         % movedur = length of mvmt recording
         mvtol = 0.5; % frac of mvmt bout which must be moving to consider mvmt
         mvlen = 2.0; % minimum length to consider movement (sec)
+        
         [movet,movey] = loadMoveFile(filename_trunc); % loads associated movement file
         disp('loaded')
         movet = movet-movet(1)+movestart;

@@ -16,6 +16,7 @@ function result = spikeDensityFunction(data)
         end
         subplot(2,2,modVal)
         if isempty(onSets) && isempty(offSets)
+            plot(allTimes,movements)
         else
             %if movement continues all the way to the end
             if onSets(end) > offSets(end)
@@ -58,16 +59,18 @@ function result = spikeDensityFunction(data)
             end
             onSets = onSets(toDelete==0);
             offSets = offSets(toDelete == 0);
-            
             if length(onSets) ~= 0
                 totalSDF = zeros(length(onSets), beforeOnS*1000 + timeAfterOffS*1000 + 1);
                 times = (-beforeOnS:0.001:timeAfterOffS);
+                sdfTimes = (lo + stdeviation*3):dt:(hi-stdeviation*3);
                 hold on
                 for i = 1: length(onSets)
                     begin = onSets(i) + 1  - beforeOnS*1000 - (lo + stdeviation*3)*1000;
                     endIndex = onSets(i) + 1 + timeAfterOffS*1000 - (lo + stdeviation*3)*1000;
+                    firstMoveT = allTimes(onSets(i) + 1 - beforeOnS*1000);
+                    endMoveT = allTimes(onSets(i) + 1 + timeAfterOffS*1000);
                     totalSDF(i,:) = sdf(begin: endIndex);
-                    movePhase = ['Time ' num2str(begin/1000) ' to ' num2str(endIndex/1000) ];
+                    movePhase = ['Time ' num2str(firstMoveT) ' to ' num2str(endMoveT) ];
                     plot(times, totalSDF(i,:),'DisplayName',movePhase)
                 end
                 yL = get(gca,'YLim');
@@ -78,7 +81,6 @@ function result = spikeDensityFunction(data)
                 xlabel('Time from movement Onset')
                 ylabel('SDF value')
                 lgd = legend('show');
-                lgd.String{end} = 'Average';
             else
                plot(allTimes,movements)
                msg = ['There is movement in a phase before this onset in ' data.fileName{1}];
