@@ -105,7 +105,7 @@ for f = 1:data.nfiles
         chanNum = chan.Channel; % order is not necessarily numerical as in xls
         us = find(chan.UnitCounts); % possible units
         us = us(us>=3);
-        chans = [chans c*ones(1,length(us))];
+        chans = [chans chanNum*ones(1,length(us))];
         chanNumbers = [chanNumbers chanNum*ones(1,length(us))];
         for q = 1:length(us)
             u = us(q);
@@ -220,12 +220,8 @@ for f = 1:data.nfiles
     data.prelight{f} = pre;
 
     %% Get movement
-    ev = PL2EventTs(filename,1);
-    movestart = ev.Ts; % should be one value
-    if isempty(movestart) % if no event dropped
-        movestart = 0;
-    end
-    try
+      movestart = 0;
+     try
         % movex = time of each mvmt smapling, movey = velocity at time,
         % movedur = length of mvmt recording
         mvtol = 0.5; % frac of mvmt bout which must be moving to consider mvmt
@@ -245,9 +241,9 @@ for f = 1:data.nfiles
         data.movey_raw{f} = movey;
         data.movet_rs{f} = movexrs;
         data.moving_rs{f} = moveyrs;
-   catch
-        disp(['No movement file for ' filename_trunc])
-   end
+    catch
+         disp(['No movement file for ' filename_trunc])
+    end
     
     %% Get LFPs
     % If want LFP's pre, post and dur, check this 9and light section) in

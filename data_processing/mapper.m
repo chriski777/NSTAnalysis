@@ -91,19 +91,35 @@ function output = mapper(data,fxn,movement,graph)
    allNames = transpose(allNames);
    resFileName = sprintf('%s Results.csv', fileType);
    fid = fopen(resFileName,'wt');
-   
+
+   SPKChanGroups = getit(data.spkchans);
+   SPKChanNames = cell(totalResults,1);
+   counter = 1;
+   for i = 1:length(SPKChanGroups)
+       currChannels = SPKChanGroups{i};
+       [uniqueChannels,index] = unique(currChannels);
+       uniqueChannels = currChannels(sort(index));
+       for k = 1:length(uniqueChannels)
+           uChan = uniqueChannels(k);
+           frequency = sum(currChannels == uChan);
+           for j = 1:frequency
+               charVal = [num2str(uChan),char(97+j)];
+               SPKChanNames{counter} = charVal;
+               counter = counter + 1;
+           end
+       end 
+   end
+   typeCell = typeAssign('classifications.xlsx',fileType);
    %Writes results to results.csv file with corresponding name and result
-   
-   %typeCell = typeAssign('classifications.xlsx',fileType);
-   headers = {'FileName', 'Spikes', 'EndTimeStamp', 'allISIstd', [fxn]};   
-   M = [headers; allNames, num2cell(spikes), num2cell(times), num2cell(stds), num2cell(results)];
-   %M = combineType(typeCell,N);
+   headers = {'FileName', 'Spikes', 'EndTimeStamp', 'allISIstd', [fxn], 'Class'};   
+   N = [ allNames, num2cell(spikes), num2cell(times), num2cell(stds), num2cell(results)];
+   M = [headers; combineType(typeCell,N,SPKChanNames)];
    output = M;
    if fid > 0 
        %Writes column headers
-       fprintf(fid,'%s, %s, %s, %s, %s\n', M{1,1}, M{1,2},  M{1,3}, M{1,4}, M{1,5});
+       fprintf(fid,'%s, %s, %s, %s, %s, %s\n', M{1,1}, M{1,2},  M{1,3}, M{1,4}, M{1,5}, M{1,6});
        for k = 2:size(M,1)
-        fprintf(fid,'%s, %d, %f, %f, %f\n',M{k,1}, M{k,2},  M{k,3}, M{k,4}, M{k,5});
+        fprintf(fid,'%s, %d, %f, %f, %f, %f\n',M{k,1}, M{k,2},  M{k,3}, M{k,4}, M{k,5}, M{k,6});
        end
        fclose(fid);
    end
