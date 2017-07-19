@@ -3,6 +3,14 @@ function [output1, output2] =  scatterPlot(fxn1,fxn2)
 %scatterPlot: Displays the scatterplot of the result of two functions. The
 %   scatterPlot function does NOT apply the functions to the results. It
 %   only can be used AFTER the function scripts have been used.
+
+%Input Parameters: 
+%   fxn1: String that contains the first function handle
+%   fxn2: String that contains the second function handle
+
+%Output Parameters:
+%   output1 : N (number of files/conditions) x 1 vector containing Medians of results of first fxn
+%   output2 : N x 1 vector containing medians of results of second fxn
     addpath('results\')
     if (exist(['results\', fxn1], 'file') == 7 && exist(['results\', fxn2], 'file') == 7 )
         directory1 = dir(['results\', fxn1, '\*.csv']);
@@ -17,7 +25,6 @@ function [output1, output2] =  scatterPlot(fxn1,fxn2)
         end 
         output1 = zeros(numFiles1, 1);
         output2 = zeros(numFiles1,1);
-        corrCoeff = zeros(numFiles1,1);
         figure
         for i = 1:numFiles1
             %directory1 name can be the same as the same results are read
@@ -36,13 +43,19 @@ function [output1, output2] =  scatterPlot(fxn1,fxn2)
              colNumClass = strcmp(firstRow1, [' ', 'Class']);
              firstCol = cell1((2:end),colNum1);
              secCol = cell2((2:end),colNum2);
-             classCol = cell1((2:end),colNumClass);
-             
+             if sum(colNumClass) == 0
+                 colNumClass = strcmp(firstRow2, [' ', 'Class']);
+                 classCol =cell2((2:end),colNumClass);
+             else
+                classCol = cell1((2:end),colNumClass);
+             end
              firstCol(strcmp(firstCol, ' NaN')) = {NaN};
              secCol(strcmp(secCol,' NaN')) = {NaN};
              x_y = cell2mat([firstCol, secCol, classCol]);
+             %Delete rows where one of the columns has a NaN value
              x_y = x_y(~any(isnan(x_y),2),:);
-             %Median of x_axis
+             
+             %Median of results for both functions
              output1(i) = median(x_y(:,1));
              output2(i) = median(x_y(:,2));
              axes(i) = subplot(4,2,i);   

@@ -1,4 +1,5 @@
 function result = spikeDensityFunction(data)
+%spikeDensityFunction: Calculates sdf based on movement data
     if isempty(data.movet_rs) || isempty(data.moving_rs)
         msg = ['There is no movement file associated with this ' data.fileName{1}];
         warning(msg)
