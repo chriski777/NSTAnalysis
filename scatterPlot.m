@@ -1,6 +1,8 @@
-function scatterPlot(fxn1,fxn2)
+function [output1, output2] =  scatterPlot(fxn1,fxn2)
 %Chris Ki, June 2017, Gittis Lab
-%scatterPlot
+%scatterPlot: Displays the scatterplot of the result of two functions. The
+%   scatterPlot function does NOT apply the functions to the results. It
+%   only can be used AFTER the function scripts have been used.
     addpath('results\')
     if (exist(['results\', fxn1], 'file') == 7 && exist(['results\', fxn2], 'file') == 7 )
         directory1 = dir(['results\', fxn1, '\*.csv']);
@@ -13,6 +15,9 @@ function scatterPlot(fxn1,fxn2)
         if numFiles2 == 0 
             error(['There are not any results in the ', fxn2, ' directory.'])
         end 
+        output1 = zeros(numFiles1, 1);
+        output2 = zeros(numFiles1,1);
+        corrCoeff = zeros(numFiles1,1);
         figure
         for i = 1:numFiles1
             %directory1 name can be the same as the same results are read
@@ -20,23 +25,32 @@ function scatterPlot(fxn1,fxn2)
              fileName2 = ['results\', fxn2,'\', directory1(i).name];
              [~,~,cell1] = xlsread(fileName1);
              [~,~,cell2] = xlsread(fileName2);
+             %Isolate the columns with the fxn results from each cell
              firstRow1 = cell1(1,:);
              colNum1 = strcmp(firstRow1, [' ',fxn1]);
              firstRow2 = cell2(1,:);
              colNum2 = strcmp(firstRow2, [' ',fxn2]);
+             %3rd column will hold the corresponding class integers
+             % both class columns from file 1 and 2 should be same since
+             % both files are from same conditions
+             colNumClass = strcmp(firstRow1, [' ', 'Class']);
              firstCol = cell1((2:end),colNum1);
              secCol = cell2((2:end),colNum2);
+             classCol = cell1((2:end),colNumClass);
+             
              firstCol(strcmp(firstCol, ' NaN')) = {NaN};
              secCol(strcmp(secCol,' NaN')) = {NaN};
-             x_y = cell2mat([firstCol, secCol]);
+             x_y = cell2mat([firstCol, secCol, classCol]);
              x_y = x_y(~any(isnan(x_y),2),:);
-             directory1(i).name
-             median(x_y(:,1))
+             %Median of x_axis
+             output1(i) = median(x_y(:,1));
+             output2(i) = median(x_y(:,2));
              axes(i) = subplot(4,2,i);   
-             scatter(x_y(:,1), x_y(:,2))
+             gscatter(x_y(:,1), x_y(:,2),x_y(:,3),'kbgm', 'oooo')
              xlabel(fxn1);
              ylabel(fxn2);
              title([fxn1 ' vs. ' fxn2 ' for ' directory1(i).name]);
+             lgd = legend('No Class', 'Regular', 'Irregular', 'Burst');
         end
         linkaxes(axes)
     else

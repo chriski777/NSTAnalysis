@@ -87,9 +87,9 @@ switch lower(type)
             'KM011116eAWsorttt-01.pl2';
             'KM011116fAWsorttt-01.pl2';
             %3 
-            'KM090815c_4.094AWsorttt-01.pl2';
-            'KM090815d_4.151AWsorttt-01.pl2';
-            'KM090815e_4.231AWsorttt-01.pl2'; };
+            'KM090815cAWsorttt-01.pl2';
+            'KM090815dAWsorttt-01.pl2';
+            'KM090815eAWsorttt-01.pl2'; };
 
         input.animalcodes = [1 1 1 1 1 1 1 1 2 2 2 2 2 2 3 3 3 ];
         data = open_data(input);
