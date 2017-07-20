@@ -1,8 +1,11 @@
 function output = typeAssign(fileName,sheetType)
-%Chris Ki, June 2017, Gittis Lab
+%Chris Ki, July 2017, Gittis Lab
 %typeAssign: Function that assigns a number (burst classification) to every
 %   cell in our dataset
-%   Make sure to add the file through the set path. 
+%   Make sure to add the file through the set path. Set the file name to
+%   'classifications.xlsx'. If you would like another fileName you can
+%   change the fileName input in the mapper fxn line 112.
+
 %Input Parameters:
 %   fileName: excel file witht the classifications you want to import. This
 %   file must have 4 columns: a column that contains 'FullRegularIrregularBurst' with
