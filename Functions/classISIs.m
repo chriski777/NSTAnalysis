@@ -1,6 +1,22 @@
-function output = classISIs(data)
+function output = classISIs(data, resultType)
 %Chris Ki, July 2017, Gittis Lab
-%classISIs: Function that splits ISIs into groups with matching classes
+%classISIs: Function that splits ISIs/spikeTrains into groups with matching classes
+
+%Output Parameter: 
+%   Output depends on resultType parameter
+%   If resultType is 'ISI': ISIs of all spike trains will be split into the
+%   4 different classes (No class, Regular, Irregular, Burst)
+%   If resultType is 'Spike': timestamps of all spike trains will be split
+%   into the 4 classes listed above
+
+%Input Parameter:
+%   data: Must have the following fields
+%       data.type: Specifies condition that data belongs to : E.G ('Naive',
+%       'Acute',etc.)
+%       data.ts: A cell of All Time Stamps of spike trains
+%       data.files: Cell of fileNames associated with the spike trains
+%   resultType: Specifies whether you want ISIs or Spikes split into
+%       classes. Only accepts 'ISI' or 'Spike' (case insensitive)
 
    addpath('Functions')
    currType = data.type;
@@ -23,10 +39,15 @@ function output = classISIs(data)
    
    %Column of allISIs for each spike train
    allISIs = cell(totalResults,1);
-   for k = 1:totalResults
-       allISIs{k} = ISIconverter(allTimeStamps{k},length(allTimeStamps{k})-1);
+   if strcmpi(resultType,'ISI')
+       for k = 1:totalResults
+           allISIs{k} = ISIconverter(allTimeStamps{k},length(allTimeStamps{k})-1);
+       end
+   elseif strcmpi(resultType,'Spike')
+       for l = 1:totalResults
+           allISIs{l} = allTimeStamps{l};
+       end
    end
-   
    %Finds corresponding Spike channel and unit
    SPKChanGroups = getit(data.spkchans);
    SPKChanNames = cell(totalResults,1);
