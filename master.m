@@ -64,9 +64,12 @@ function master(fxn, dataTypes,movement)
             data = dataInitializer(currType);
             if strcmpi(fxn,'spikedensityfunction')
                mapper(data,fxn,movement,1);
+            elseif strcmpi(fxn, 'cellbycellISIAutos')
+                sepData = classISIs(data);
+                cellbycellISIs(sepData);
             elseif strcmpi(fxn, 'classISIHists')
                 sepData = classISIs(data);
-                classISIHists(sepData);
+                classISIHists(sepData,currType);
             else
                mapper(data,fxn,movement,0);
             end
