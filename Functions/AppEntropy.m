@@ -25,8 +25,8 @@ function output = AppEntropy(data)
         end
         % embedding dimension is represented as m
         m = data.m;
-        % comparison length should be 15% of SD of the subsetISIs
-        r = 0.15* std(subsetISIs);
+        % comparison length should be 20% of SD of the subsetISIs
+        r = 0.20 * std(subsetISIs);
         %Initialize matrix for phi m
         x_matrix = zeros((numISIs - m + 1), m);
         %for phi m+1

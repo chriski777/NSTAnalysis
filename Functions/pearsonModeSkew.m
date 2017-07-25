@@ -11,9 +11,9 @@ function result = pearsonModeSkew(data)
     ISIs = ISIconverter(data.SPKC,length(data.SPKC)-1);
     stdAllISIs = std(ISIs);
     meanAllISIs = mean(ISIs);
-    hist =  histogram(ISIs, 'BinWidth', 0.005);
+    hist =  histogram(ISIs, 'BinWidth', 0.004);
     [~, index] = max(hist.Values);
-    modeAllISIs = (index*0.005 + (index-1)*0.005)/2; 
+    modeAllISIs = (index*0.004 + (index-1)*0.004)/2; 
     result = (meanAllISIs - modeAllISIs)/stdAllISIs;
 end
 

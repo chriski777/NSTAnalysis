@@ -6,7 +6,7 @@ function result = fanoFactor(data)
 %
 %   SPKC = A single spike train vector where each entry is the timepoint at
 %       occurence of a spike
-    %Non-overlapping time window
+    %Non-overlapping time window of 50 ms
     t = 0.05;
     endTime = data.end;
     startTime = 0;
