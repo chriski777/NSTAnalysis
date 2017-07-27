@@ -70,7 +70,7 @@ function output = mapper(data,fxn,movement,graph)
        %for StatAv Parameter
        input.numOfEqualSegs = 40;
        %for AppEntropy parameter
-       input.AppEnumISIs = 3000;
+       input.numISIs = 3000;
        input.m = 2;
        input.shuffPop = 100;
  

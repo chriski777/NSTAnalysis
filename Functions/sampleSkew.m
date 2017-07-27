@@ -9,22 +9,38 @@ function result = sampleSkew(data)
 %data = A struct that has two fields.
 %       data.SPKC = single spike train vector where each entry is the timepoint at
 %       occurence of a spike
-    binLength = 0.004;
-    ctrs = [0:binLength:1.0];
-    ISIs = ISIconverter(data.SPKC,length(data.SPKC)-1);
-    hist = histogram(ISIs,ctrs); 
-    %convert each bin count to center of bin to check accurately for skew
-    %of the binned histogram
-    totalISIs = [];
-    for i = 1:length(hist.Values)
-        binCtr = (binLength*i + binLength*(i-1))/2;
-        totalISIs = [totalISIs, repmat(binCtr,1,hist.Values(i))];
+
+    if data.numISIs < length(data.SPKC) - 1 
+        binLength = 0.004;
+        %Look up to 400ms
+        endBin = 0.4;
+        ctrs = [0:binLength:endBin];
+        %Perform analysis on first data.numISIs spikes
+        ISIs = ISIconverter(data.SPKC,length(data.SPKC)- 1);
+        quantiles = quantile(ISIs, [0, 0.25, 0.5, 0.75, 1.0]);
+        botExtreme = quantiles(2) - 1.5*iqr(ISIs);
+        topExtreme = quantiles(4) + 1.5*iqr(ISIs);
+        totalISIs = [];
+        counter = 1;
+        for i = 1:length(ISIs)
+            %Be within the botExtreme and topExtreme
+            currISI = ISIs(i);
+            if ((botExtreme < currISI) & (currISI < topExtreme) & (counter <= data.numISIs))
+                totalISIs = [totalISIs,currISI];
+                counter = counter + 1;
+            end
+        end
+        stdAllISIs = std(totalISIs);
+        meanAllISIs = mean(totalISIs);
+        thirdMoment = sum((totalISIs - repmat(meanAllISIs,1,length(totalISIs))).^3)/length(totalISIs);
+        skewNess = thirdMoment/((stdAllISIs)^3);
+        %We must take care of the bias present in the sample by multiplying by
+        %   sqrt(n*n-1)/n-2
+        sampFactor = sqrt(length(totalISIs)*(length(totalISIs) - 1))/(length(totalISIs) - 2);
+        result = skewNess*sampFactor;
+    else
+        warning(['The length of the spike train is ' num2str(length(data.SPKC)) ...
+            ' less than ' num2str(data.numISIs)])
+        result = NaN;
     end
-    stdAllISIs = std(totalISIs);
-    meanAllISIs = mean(totalISIs);
-    thirdMoment = sum((totalISIs - repmat(meanAllISIs,1,length(totalISIs))).^3)/length(totalISIs);
-    skewNess = thirdMoment/((stdAllISIs)^3);
-    %We must take care of the bias present in the sample by multiplying by
-    %   sqrt(n*n-1)/n-2
-    sampFactor = sqrt(length(totalISIs)*(length(totalISIs) - 1))/(length(totalISIs) - 2);
-    result = skewNess*sampFactor;
+end

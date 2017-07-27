@@ -66,7 +66,10 @@ function master(fxn, dataTypes,movement)
                mapper(data,fxn,movement,1);
             elseif strcmpi(fxn, 'cellbycellISIAutos')
                 sepData = classISIs(data,'spike');
-                cellbycellISIs(sepData);
+                cellbycellISIAutos(sepData);
+            elseif strcmpi(fxn, 'expFitAutos')
+                sepData = classISIs(data, 'spike');
+                expFitAutos(sepData);
             elseif strcmpi(fxn, 'classISIHists')
                 sepData = classISIs(data, 'ISI');
                 classISIHists(sepData,currType);
