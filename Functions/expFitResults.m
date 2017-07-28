@@ -80,9 +80,21 @@ function result = expFitResults(data)
             resultB = expFit.b;
             resultC = expFit.c;
             resultD = expFit.d;
-            topVal = (resultA*exp(resultB*maxTime) + resultC*exp(resultD*maxTime))/maxVal;
-            botVal = (resultA*exp(resultB*minTime) + resultC*exp(resultD*minTime))/maxVal;
-            m = (topVal - botVal)/(maxTime - minTime);
+            %Average instantaneous slope of 100 points
+            %Take mean of instantaneous slopes of double exponential fit 
+            newFitX = linspace(min(fitX), max(fitX));
+            syms x
+            f = resultA* exp(resultB*x) + resultC* exp(resultD*x);
+            df = diff(f);
+            dfy = vpa(subs(df,x,newFitX));
+            m = log(abs(mean(dfy)));
+
+%             %Linear Fit of Min and Max 
+%             fitY = fitY./maxVal;
+%             deltY = fitY(1) - fitY(end);
+%             deltX = fitX(1) - fitX(end);
+%             %Line fit : m = deltY/deltX;
+%             m = log(abs(deltY/deltX));
         end
     end
     result = m;
