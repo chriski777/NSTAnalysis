@@ -16,6 +16,7 @@ function [output1, output2, output3] =  scatterPlot3d(fxn1,fxn2, fxn3)
 %   output3 : N vector containing medians of results of third fxn
     addpath('results\')
     colors = 'kbgm';
+    numClass = 4;
     if (exist(['results\', fxn1], 'file') == 7 && exist(['results\', fxn2], 'file') == 7  && exist(['results\', fxn3], 'file') == 7)
         directory1 = dir(['results\', fxn1, '\*.csv']);
         directory2 = dir(['results\', fxn2, '\*.csv']);
@@ -35,8 +36,11 @@ function [output1, output2, output3] =  scatterPlot3d(fxn1,fxn2, fxn3)
         output1 = zeros(numFiles1,1);
         output2 = zeros(numFiles1,1);
         output3 = zeros(numFiles1,1);
+        
+        indexMat = reshape((1:numClass*numFiles1),[numClass,numFiles1])';
+        stemIndex = 1;
         for i = 1:numFiles1
-            figure(i)
+            figI = figure(i);
             %directory1 name can be the same as the same results are read
              fileName1 = ['results\', fxn1,'\', directory1(i).name];
              fileName2 = ['results\', fxn2,'\', directory1(i).name];
@@ -58,6 +62,7 @@ function [output1, output2, output3] =  scatterPlot3d(fxn1,fxn2, fxn3)
              firstCol = cell1((2:end),colNum1);
              secCol = cell2((2:end),colNum2);
              thirdCol = cell3((2:end),colNum3);
+             %If firstCol doesn't have class, delegate to secondClass
              if sum(colNumClass) == 0
                  colNumClass = strcmp(firstRow2, [' ', 'Class']);
                  classCol =cell2((2:end),colNumClass);
@@ -70,20 +75,18 @@ function [output1, output2, output3] =  scatterPlot3d(fxn1,fxn2, fxn3)
              x_y = cell2mat([firstCol, secCol, thirdCol, classCol]);
              %Delete rows where one of the columns has a NaN value
              x_y = x_y(~any(isnan(x_y),2),:);
-             
              %Median of results for both functions
              output1(i) = median(x_y(:,1));
              output2(i) = median(x_y(:,2));
              output3(i) = median(x_y(:,3));
              allMatrix = x_y;
-             for class = 1:4
+             for class = 1:numClass
                 classMatrix = allMatrix(allMatrix(:,4) == (class - 1),:);
                 sizeMat = size(classMatrix);
                 numRows = sizeMat(1);
-                for k = 1:numRows
-                 plot3(classMatrix(k,1), classMatrix(k,2), classMatrix(k,3), [colors(class), 'o'])                   
-                end
                 hold on
+                h(stemIndex) = stem3(classMatrix(:,1), classMatrix(:,2), classMatrix(:,3), [colors(class), 'o']);
+                stemIndex = stemIndex + 1;
              end
              grid
              rotate3d on 
@@ -91,7 +94,14 @@ function [output1, output2, output3] =  scatterPlot3d(fxn1,fxn2, fxn3)
              xlabel(fxn1);
              ylabel(fxn2);
              zlabel(fxn3);
-             title([fxn1 ' vs. ' fxn2 'vs. ' fxn3 ' for ' directory1(i).name]);
+             %Sets baseline Value to figure's bottom Z Limit value for 
+             minZ = figI.CurrentAxes.ZLim(1);
+             currIndices = indexMat(i,:);
+             for k = 1:numClass
+                currIndex = currIndices(k);
+                h(currIndex).BaseValue =  minZ;
+             end
+             title([fxn1 ' vs. ' fxn2 ' vs. ' fxn3 ' for ' directory1(i).name]);
              lgd = legend('No Class', 'Regular', 'Irregular', 'Burst');
         end
     else
