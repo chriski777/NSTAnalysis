@@ -1,6 +1,9 @@
 function output = classISIHists(sepData,currType)
 %Chris Ki, July 2017, Gittis Lab
+%classISIHists: Produces ISI histograms that are grouped by classes
+%(No Class, Regular, Irregular, and Bursty) Neurons
 
+%
     titleSet = {'No class', 'Regular', 'Irregular', 'Burst'};
     keySet = [1,2,3,4];
     titleMap = containers.Map(keySet,titleSet);

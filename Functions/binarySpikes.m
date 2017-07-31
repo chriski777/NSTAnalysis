@@ -1,6 +1,7 @@
 function output = binarySpikes(SPKC,dt)
 %Chris Ki, July 2017, Gittis Lab
-%binarySpikes : binarizes a spike train that is represented in time stamps
+%binarySpikes : binarizes a spike train that is represented in time stamps.
+%   Useful for Autocorrelogram
 
 %Input Parameters:
 %   SPKC =  n x 1 Time stamps of spikes

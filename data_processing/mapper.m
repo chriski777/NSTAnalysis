@@ -111,15 +111,15 @@ function output = mapper(data,fxn,movement,graph)
    end
    typeCell = typeAssign('classifications.xlsx',fileType);
    %Writes results to results.csv file with corresponding name and result
-   headers = {'FileName', 'Spikes', 'EndTimeStamp', 'allISIstd', [fxn], 'Class'};   
-   N = [ allNames, num2cell(spikes), num2cell(times), num2cell(stds), num2cell(results)];
+   headers = {'FileName', 'SPKCName', 'Spikes', 'End', 'STD', [fxn], 'Class'};   
+   N = [ allNames, SPKChanNames, num2cell(spikes), num2cell(times), num2cell(stds), num2cell(results)];
    M = [headers; combineType(typeCell,N,SPKChanNames)];
    output = M;
    if fid > 0 
        %Writes column headers
-       fprintf(fid,'%s, %s, %s, %s, %s, %s\n', M{1,1}, M{1,2},  M{1,3}, M{1,4}, M{1,5}, M{1,6});
+       fprintf(fid,'%s, %s, %s, %s, %s, %s, %s\n', M{1,1}, M{1,2},  M{1,3}, M{1,4}, M{1,5}, M{1,6},  M{1,7});
        for k = 2:size(M,1)
-        fprintf(fid,'%s, %d, %f, %f, %f, %f\n',M{k,1}, M{k,2},  M{k,3}, M{k,4}, M{k,5}, M{k,6});
+        fprintf(fid,'%s, %s, %d, %f, %f, %f, %f\n',M{k,1}, M{k,2},  M{k,3}, M{k,4}, M{k,5}, M{k,6}, M{k,7});
        end
        fclose(fid);
    end

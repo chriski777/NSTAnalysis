@@ -56,12 +56,16 @@ function [output1, output2, output3] =  scatterPlot3d(fxn1,fxn2, fxn3)
              firstRow3 = cell3(1,:);
              colNum3 = strcmp(firstRow3, [' ',fxn3]);
              %3rd column will hold the corresponding class integers
-             % both class columns from file 1 and 2 should be same since
+             % both class columns and SPKC name from file 1 and 2 should be same since
              % both files are from same conditions
              colNumClass = strcmp(firstRow1, [' ', 'Class']);
+             colFileName = strcmp(firstRow1, ['', 'FileName']);
+             colSPKCName = strcmp(firstRow1, [' ', 'SPKCName']);
              firstCol = cell1((2:end),colNum1);
              secCol = cell2((2:end),colNum2);
              thirdCol = cell3((2:end),colNum3);
+             fileCol = cell1((2:end), colFileName);
+             SPKCCol = cell1((2:end), colSPKCName);
              %If firstCol doesn't have class, delegate to secondClass
              if sum(colNumClass) == 0
                  colNumClass = strcmp(firstRow2, [' ', 'Class']);
@@ -72,14 +76,26 @@ function [output1, output2, output3] =  scatterPlot3d(fxn1,fxn2, fxn3)
              firstCol(strcmp(firstCol, ' NaN')) = {NaN};
              secCol(strcmp(secCol,' NaN')) = {NaN};
              thirdCol(strcmp(thirdCol,' NaN')) = {NaN};
-             x_y = cell2mat([firstCol, secCol, thirdCol, classCol]);
+             
+             x_y_z = cell2mat([firstCol, secCol, thirdCol, classCol]);
              %Delete rows where one of the columns has a NaN value
-             x_y = x_y(~any(isnan(x_y),2),:);
+             new_x_y_z = x_y_z(~any(isnan(x_y_z),2),:);
+             newFileCol = fileCol(~any(isnan(x_y_z),2),:);
+             newSPKCCol = SPKCCol(~any(isnan(x_y_z),2),:);
              %Median of results for both functions
-             output1(i) = median(x_y(:,1));
-             output2(i) = median(x_y(:,2));
-             output3(i) = median(x_y(:,3));
-             allMatrix = x_y;
+             output1(i) = median(new_x_y_z(:,1));
+             output2(i) = median(new_x_y_z(:,2));
+             output3(i) = median(new_x_y_z(:,3));
+
+             %Creates dataStructs which will be stored in axes of figure
+             dataStats = struct();
+             dataStats.x =  new_x_y_z(:,1);
+             dataStats.y = new_x_y_z(:,2);
+             dataStats.z = new_x_y_z(:,3);
+             dataStats.fileName = newFileCol;
+             dataStats.SPKC = newSPKCCol;
+
+             allMatrix = new_x_y_z(:,:);
              for class = 1:numClass
                 classMatrix = allMatrix(allMatrix(:,4) == (class - 1),:);
                 sizeMat = size(classMatrix);
@@ -94,6 +110,7 @@ function [output1, output2, output3] =  scatterPlot3d(fxn1,fxn2, fxn3)
              xlabel(fxn1);
              ylabel(fxn2);
              zlabel(fxn3);
+             setappdata(gca, 'dataStats', dataStats);
              %Sets baseline Value to figure's bottom Z Limit value for 
              minZ = figI.CurrentAxes.ZLim(1);
              currIndices = indexMat(i,:);
