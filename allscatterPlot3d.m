@@ -1,6 +1,6 @@
-function [output1, output2, output3] =  scatterPlot3d(fxn1,fxn2, fxn3)
+function [output1, output2, output3] =  allscatterPlot3d(fxn1,fxn2, fxn3)
 %Chris Ki, July 2017, Gittis Lab
-%scatterPlot3d: Displays the 3d scatterplot of the result of three functions. The
+%allScatterPlot3d: Displays the 3d scatterplot of the result of three functions for ALL conditions. The
 %   scatterPlot3d function does NOT apply the functions to the results. It
 %   only can be used AFTER the function scripts have been used and results
 %   have been successfully produced.
@@ -16,6 +16,7 @@ function [output1, output2, output3] =  scatterPlot3d(fxn1,fxn2, fxn3)
 %   output3 : N vector containing medians of results of third fxn
     addpath('results\')
     colors = 'kbgm';
+    mTypes = '.s^x';
     numClass = 4;
     if (exist(['results\', fxn1], 'file') == 7 && exist(['results\', fxn2], 'file') == 7  && exist(['results\', fxn3], 'file') == 7)
         directory1 = dir(['results\', fxn1, '\*.csv']);
@@ -39,8 +40,26 @@ function [output1, output2, output3] =  scatterPlot3d(fxn1,fxn2, fxn3)
         
         indexMat = reshape((1:numClass*numFiles1),[numClass,numFiles1])';
         stemIndex = 1;
+        figI = figure;
+        %%%REMOVE WHEN FIGURE IS DONE
+        zaxis = [-5,3.5];
+        viewVector = [-109,44];
+        zlim(zaxis)        
+        %CAPTURES Entire DATASET
+        %ylim([-1, 4])
+        %xlim([0,4])
+        ylim([-1, 2])
+        xlim([0,2])
+        %%%%
+        %Creates dataStructs which will be stored in axes of figure
+        dataStats = struct();
+        dataStats.x = [];
+        dataStats.y = [];
+        dataStats.z = [];
+        dataStats.fileName = [];
+        dataStats.SPKC = [];
+        hold on
         for i = 1:numFiles1
-            figI = figure(i);
             %directory1 name can be the same as the same results are read
              fileName1 = ['results\', fxn1,'\', directory1(i).name];
              fileName2 = ['results\', fxn2,'\', directory1(i).name];
@@ -87,49 +106,42 @@ function [output1, output2, output3] =  scatterPlot3d(fxn1,fxn2, fxn3)
              output2(i) = median(new_x_y_z(:,2));
              output3(i) = median(new_x_y_z(:,3));
                 
-             %Creates dataStructs which will be stored in axes of figure
-             dataStats = struct();
-             dataStats.x =  new_x_y_z(:,1);
-             dataStats.y = new_x_y_z(:,2);
-             dataStats.z = new_x_y_z(:,3);
-             dataStats.fileName = newFileCol;
-             dataStats.SPKC = newSPKCCol;
+             dataStats.x = [dataStats.x; new_x_y_z(:,1)];
+             dataStats.y = [dataStats.y; new_x_y_z(:,2)];
+             dataStats.z = [dataStats.z; new_x_y_z(:,3)];
+             dataStats.fileName = [dataStats.fileName;newFileCol];
+             dataStats.SPKC = [dataStats.SPKC; newSPKCCol];
              
              allMatrix = new_x_y_z(:,:);
              
-%              numClass = 3;
-%              allMatrix(:,4) = kmeans(new_x_y_z(:,1:3),3);   
              for class = 1:numClass
                 classMatrix = allMatrix(allMatrix(:,4) == (class - 1),:);
                 sizeMat = size(classMatrix);
-                numRows = sizeMat(1);
-                hold on
-                h(stemIndex) = stem3(classMatrix(:,1), classMatrix(:,2), classMatrix(:,3), [colors(class), 'o']);
-                stemIndex = stemIndex + 1;
+                h= stem3(classMatrix(:,1), classMatrix(:,2), classMatrix(:,3), 'BaseValue',zaxis(1), ...
+                    'ShowBaseLine', 'off','MarkerFaceColor',colors(class), 'MarkerSize', 10, ...
+                    'Marker', mTypes(class), 'Color', colors(class));
              end
-             grid
-             rotate3d on 
-             hold off
-             xlabel(fxn1);
-             ylabel(fxn2);
-             zlabel(fxn3);
-             %Add dataStruct that contains x, y, z coordinates and
-             %fileNames/SPKCs
-             setappdata(gca, 'dataStats', dataStats);
-             %set default cursor mode to custom script
-             dcm = datacursormode(figI);
-             set(dcm, 'UpdateFcn', @data_cursor_stats, 'Enable', 'on');
-             
-             %Sets baseline Value to figure's bottom Z Limit value for 
-             minZ = figI.CurrentAxes.ZLim(1);
-             currIndices = indexMat(i,:);
-             for k = 1:numClass
-                currIndex = currIndices(k);
-                h(currIndex).BaseValue =  minZ;
-             end
-             title([fxn1 ' vs. ' fxn2 ' vs. ' fxn3 ' for ' directory1(i).name]);
-             lgd = legend('No Class', 'Regular', 'Irregular', 'Burst');
         end
+        hold off
+        grid
+        rotate3d on 
+        %Add dataStruct that contains x, y, z coordinates and
+        %fileNames/SPKCs
+        setappdata(gca, 'dataStats', dataStats);
+        size(dataStats.x)
+        size(dataStats.y)
+        size(dataStats.z)
+        size(dataStats.SPKC)
+        size(dataStats.fileName)
+        %set default cursor mode to custom script
+        dcm = datacursormode(figI);
+        set(dcm, 'UpdateFcn', @data_cursor_stats, 'Enable', 'on');
+        xlabel(fxn1);
+        ylabel(fxn2);
+        zlabel(fxn3);
+        view(viewVector)
+        title([fxn1 ' vs. ' fxn2 ' vs. ' fxn3 ' for all conditions']);
+        lgd = legend('No Class', 'Regular', 'Irregular', 'Burst');
     else
         error(['There exists no results for this fxn. Please make sure to ' , ... 
             'run the functions and have the results before using the extract ', ...

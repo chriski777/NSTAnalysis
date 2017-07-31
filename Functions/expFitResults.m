@@ -15,7 +15,7 @@ function result = expFitResults(data)
         dt = binLength;
         cellSpikes = data.SPKC;
         binaryTrain = binarySpikes(cellSpikes,dt);
-        newTime = (-round(cellSpikes(end)/dt)*dt:dt:round(cellSpikes(end)/dt)*dt);
+        newTime = round((-round(cellSpikes(end)/dt)*dt:dt:round(cellSpikes(end)/dt)*dt),4);
         result = xcorr(binaryTrain,binaryTrain);    
 
         %Normalize autocorrelogram by value at time lag = 0
