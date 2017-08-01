@@ -99,6 +99,11 @@ function [output1, output2, output3] =  allscatterPlot3d(fxn1,fxn2, fxn3)
              x_y_z = cell2mat([firstCol, secCol, thirdCol, classCol]);
              %Delete rows where one of the columns has a NaN value
              new_x_y_z = x_y_z(~any(isnan(x_y_z),2),:);
+             
+            
+             %CUSTOM CLASSIFY THIS x_y_z matrix
+             customClasses = customClassify(new_x_y_z);
+             
              newFileCol = fileCol(~any(isnan(x_y_z),2),:);
              newSPKCCol = SPKCCol(~any(isnan(x_y_z),2),:);
              %Median of results for both functions
