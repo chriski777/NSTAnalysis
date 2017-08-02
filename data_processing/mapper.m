@@ -109,7 +109,7 @@ function output = mapper(data,fxn,movement,graph)
            end
        end 
    end
-   typeCell = typeAssign('classifications.xlsx',fileType);
+   typeCell = typeAssign('custClassification.xlsx',fileType);
    %Writes results to results.csv file with corresponding name and result
    headers = {'FileName', 'SPKCName', 'Spikes', 'End', 'STD', [fxn], 'Class'};   
    N = [ allNames, SPKChanNames, num2cell(spikes), num2cell(times), num2cell(stds), num2cell(results)];

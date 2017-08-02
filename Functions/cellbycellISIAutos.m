@@ -17,7 +17,8 @@ function output = cellbycellISIAutos(sepData)
             end
             currRow = totalClassCells(j,:);
             fileName = currRow{1};
-            cellSpikes = currRow{2};          
+            SPKCtype = currRow{2};
+            cellSpikes = currRow{3};          
             currFigRowNum = mod(j-1,4) + 1;
             
             %For ISI Hist
@@ -25,7 +26,7 @@ function output = cellbycellISIAutos(sepData)
             cellISIs = ISIconverter(cellSpikes, length(cellSpikes) - 1);
             n = histc(cellISIs,ctrs);
             bar(ctrs,n,'histc')
-            title([fileName ' ' titleMap(i) ' bin = ' num2str(binLength*1000) 'ms'])             
+            title([fileName ' ' SPKCtype ' ' titleMap(i) ' bin = ' num2str(binLength*1000) 'ms'])             
             %For AutoCorrs
             dt = binLength;
             subplot(4,2,placeMat(currFigRowNum, 2))

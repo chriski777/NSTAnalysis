@@ -17,6 +17,7 @@ function [output1, output2, output3] =  allscatterPlot3d(fxn1,fxn2, fxn3)
     addpath('results\')
     colors = 'kbgm';
     mTypes = '.s^x';
+    orderOfFxns = {fxn1, fxn2, fxn3};
     numClass = 4;
     if (exist(['results\', fxn1], 'file') == 7 && exist(['results\', fxn2], 'file') == 7  && exist(['results\', fxn3], 'file') == 7)
         directory1 = dir(['results\', fxn1, '\*.csv']);
@@ -94,15 +95,11 @@ function [output1, output2, output3] =  allscatterPlot3d(fxn1,fxn2, fxn3)
              end
              firstCol(strcmp(firstCol, ' NaN')) = {NaN};
              secCol(strcmp(secCol,' NaN')) = {NaN};
-             thirdCol(strcmp(thirdCol,' NaN')) = {NaN};
-             
+             thirdCol(strcmp(thirdCol,' NaN')) = {NaN};             
              x_y_z = cell2mat([firstCol, secCol, thirdCol, classCol]);
+
              %Delete rows where one of the columns has a NaN value
              new_x_y_z = x_y_z(~any(isnan(x_y_z),2),:);
-             
-            
-             %CUSTOM CLASSIFY THIS x_y_z matrix
-             customClasses = customClassify(new_x_y_z);
              
              newFileCol = fileCol(~any(isnan(x_y_z),2),:);
              newSPKCCol = SPKCCol(~any(isnan(x_y_z),2),:);
@@ -117,15 +114,33 @@ function [output1, output2, output3] =  allscatterPlot3d(fxn1,fxn2, fxn3)
              dataStats.fileName = [dataStats.fileName;newFileCol];
              dataStats.SPKC = [dataStats.SPKC; newSPKCCol];
              
-             allMatrix = new_x_y_z(:,:);
-             
+             %CUSTOM CLASSIFY THIS x_y_z matrix
+             customClasses = customClassify(new_x_y_z(:,1:3), orderOfFxns);
+             allMatrix = [new_x_y_z(:,1:3),customClasses];
+%              %%%%%EXTRACT Non-classified neurons%%%%%
+%              unClassified = cell(length(allMatrix(allMatrix(:,4)==0)),6);
+%              ctr = 1;
+%              for k = 1:length(newFileCol)
+%                 if allMatrix(k,4) == 0
+%                     unClassified{ctr,1} = newFileCol{k};
+%                     unClassified{ctr,2} = newSPKCCol{k};
+%                     unClassified{ctr,3} = allMatrix(k,1);
+%                     unClassified{ctr,4} = allMatrix(k,2);
+%                     unClassified{ctr,5} = allMatrix(k,3);
+%                     unClassified{ctr,6} = allMatrix(k,4);
+%                     ctr = ctr + 1;
+%                 end
+%              end
+%              unClassified
+                %Original classifications by eye
+             %allMatrix = new_x_y_z(:,:);
              for class = 1:numClass
                 classMatrix = allMatrix(allMatrix(:,4) == (class - 1),:);
                 sizeMat = size(classMatrix);
                 h= stem3(classMatrix(:,1), classMatrix(:,2), classMatrix(:,3), 'BaseValue',zaxis(1), ...
                     'ShowBaseLine', 'off','MarkerFaceColor',colors(class), 'MarkerSize', 10, ...
                     'Marker', mTypes(class), 'Color', colors(class));
-             end
+             end            
         end
         hold off
         grid
@@ -133,11 +148,6 @@ function [output1, output2, output3] =  allscatterPlot3d(fxn1,fxn2, fxn3)
         %Add dataStruct that contains x, y, z coordinates and
         %fileNames/SPKCs
         setappdata(gca, 'dataStats', dataStats);
-        size(dataStats.x)
-        size(dataStats.y)
-        size(dataStats.z)
-        size(dataStats.SPKC)
-        size(dataStats.fileName)
         %set default cursor mode to custom script
         dcm = datacursormode(figI);
         set(dcm, 'UpdateFcn', @data_cursor_stats, 'Enable', 'on');

@@ -14,7 +14,7 @@ function output = classISIHists(sepData,currType)
         %Combine ISIs of one specific class into a single vector
         classCell = sepData{i};
         if ~isempty(classCell)
-            ISIcols = getit(classCell(:,2));
+            ISIcols = getit(classCell(:,3));
             singVect= vertcat(ISIcols{:});
             ctrs = [0:binLength:1.0];
             histogram(singVect, ctrs);

@@ -25,7 +25,8 @@ function expFitAutos(sepData)
             end
             currRow = totalClassCells(j,:);
             fileName = currRow{1};
-            cellSpikes = currRow{2};          
+            SPKCName = currRow{2};
+            cellSpikes = currRow{3};          
             currFigRowNum = mod(j-1,4) + 1;
 
             %For ISI Hist
@@ -33,12 +34,12 @@ function expFitAutos(sepData)
             cellISIs = ISIconverter(cellSpikes, length(cellSpikes) - 1);
             n = histc(cellISIs,ctrs);
             bar(ctrs,n,'histc')
-            title([fileName ' ' titleMap(i) ' bin = ' num2str(binLength*1000) 'ms'])             
+            title([fileName ' ' SPKCName ' ' titleMap(i) ' bin = ' num2str(binLength*1000) 'ms'])             
             %For AutoCorrs
             dt = binLength;
             subplot(4,2,placeMat(currFigRowNum, 2))
             binaryTrain = binarySpikes(cellSpikes,dt);
-            newTime = (-round(cellSpikes(end)/dt)*dt:dt:round(cellSpikes(end)/dt)*dt);
+            newTime = round((-round(cellSpikes(end)/dt)*dt:dt:round(cellSpikes(end)/dt)*dt),4);
             result = xcorr(binaryTrain,binaryTrain);
             %Normalize autocorrelogram by value at time lag = 0
             zeroIndex = find(newTime == 0);

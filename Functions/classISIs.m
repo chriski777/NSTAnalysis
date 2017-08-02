@@ -68,9 +68,10 @@ function output = classISIs(data, resultType)
    end
    allNames = transpose(allNames);
    N = [allNames,allISIs];
-   typeCell = typeAssign('classifications.xlsx',currType);
+   typeCell = typeAssign('custClassification.xlsx',currType);
    M = combineType(typeCell,N,SPKChanNames);
-   classVector = cell2mat(M(:,3));
+   M = [M(:,1), SPKChanNames , M(:,2:3)];
+   classVector = cell2mat(M(:,4));
    sepClasses = cell(4,1);
    for i = 1:4
     classes = M(classVector == (i-1),:);
