@@ -25,7 +25,7 @@ function output = typeAssign(fileName,sheetType)
     unitIndex = find(~cellfun(@isempty,strfind(firstRow, 'Unit')));
     fileIndex = find(~cellfun(@isempty,strfind(firstRow, 'Filename')));
     
-    keySet = {'', 'Regular', 'Irregular', 'Bursty'};
+    keySet = {'No Class', 'Regular', 'Irregular', 'Bursty'};
     valueSet = [0,1,2,3];
     typeMap = containers.Map(keySet,valueSet);
     typeCol = str(2:end,typeIndex);
@@ -33,7 +33,7 @@ function output = typeAssign(fileName,sheetType)
     nameCol = str(2:end,fileIndex);
 
     for i = 1:length(typeCol)
-        converted(i) = typeMap(typeCol{i});
+        converted(i) = typeMap(strtrim(typeCol{i}));
         currName = nameCol(i);
         nameArr = strfind(currName,'AWsorttt');
         if ~isempty(nameArr{1})

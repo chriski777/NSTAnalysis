@@ -18,7 +18,7 @@ function expFitClasses(sepData)
         totalClassCells = sepData{i};
         for j = 1: length(sepData{i})
             currRow = totalClassCells(j,:);
-            cellSpikes = currRow{2};           
+            cellSpikes = currRow{3};           
             %For AutoCorrs
             dt = binLength;
             binaryTrain = binarySpikes(cellSpikes,dt);

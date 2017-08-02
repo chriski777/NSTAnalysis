@@ -18,27 +18,29 @@ function output = cellbycellISIAutos(sepData)
             currRow = totalClassCells(j,:);
             fileName = currRow{1};
             SPKCtype = currRow{2};
-            cellSpikes = currRow{3};          
-            currFigRowNum = mod(j-1,4) + 1;
-            
-            %For ISI Hist
-            subplot(4,2,placeMat(currFigRowNum, 1))
-            cellISIs = ISIconverter(cellSpikes, length(cellSpikes) - 1);
-            n = histc(cellISIs,ctrs);
-            bar(ctrs,n,'histc')
-            title([fileName ' ' SPKCtype ' ' titleMap(i) ' bin = ' num2str(binLength*1000) 'ms'])             
-            %For AutoCorrs
-            dt = binLength;
-            subplot(4,2,placeMat(currFigRowNum, 2))
-            binaryTrain = binarySpikes(cellSpikes,dt);
-            newTime = (-round(cellSpikes(end)/dt)*dt:dt:round(cellSpikes(end)/dt)*dt);
-            result = xcorr(binaryTrain,binaryTrain);
-            %Normalize autocorrelogram by value at time lag = 0
-            zeroIndex = find(newTime == 0);
-            normVal = result(zeroIndex);
-            result = result./normVal;       
-            plot(newTime',result)
-            xlim([dt,0.5])
+            cellSpikes = currRow{3};
+            if length(cellSpikes)/cellSpikes(end)> 5
+                currFigRowNum = mod(j-1,4) + 1;
+
+                %For ISI Hist
+                subplot(4,2,placeMat(currFigRowNum, 1))
+                cellISIs = ISIconverter(cellSpikes, length(cellSpikes) - 1);
+                n = histc(cellISIs,ctrs);
+                bar(ctrs,n,'histc')
+                title([fileName ' ' SPKCtype ' ' titleMap(i) ' bin = ' num2str(binLength*1000) 'ms'])             
+                %For AutoCorrs
+                dt = binLength;
+                subplot(4,2,placeMat(currFigRowNum, 2))
+                binaryTrain = binarySpikes(cellSpikes,dt);
+                newTime = (-round(cellSpikes(end)/dt)*dt:dt:round(cellSpikes(end)/dt)*dt);
+                result = xcorr(binaryTrain,binaryTrain);
+                %Normalize autocorrelogram by value at time lag = 0
+                zeroIndex = find(newTime == 0);
+                normVal = result(zeroIndex);
+                result = result./normVal;       
+                plot(newTime',result)
+                xlim([dt,0.5])
+            end
         end
     end
 end

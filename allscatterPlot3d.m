@@ -115,25 +115,27 @@ function [output1, output2, output3] =  allscatterPlot3d(fxn1,fxn2, fxn3)
              dataStats.SPKC = [dataStats.SPKC; newSPKCCol];
              
              %CUSTOM CLASSIFY THIS x_y_z matrix
-             customClasses = customClassify(new_x_y_z(:,1:3), orderOfFxns);
-             allMatrix = [new_x_y_z(:,1:3),customClasses];
-%              %%%%%EXTRACT Non-classified neurons%%%%%
-%              unClassified = cell(length(allMatrix(allMatrix(:,4)==0)),6);
-%              ctr = 1;
-%              for k = 1:length(newFileCol)
-%                 if allMatrix(k,4) == 0
-%                     unClassified{ctr,1} = newFileCol{k};
-%                     unClassified{ctr,2} = newSPKCCol{k};
-%                     unClassified{ctr,3} = allMatrix(k,1);
-%                     unClassified{ctr,4} = allMatrix(k,2);
-%                     unClassified{ctr,5} = allMatrix(k,3);
-%                     unClassified{ctr,6} = allMatrix(k,4);
-%                     ctr = ctr + 1;
-%                 end
-%              end
-%              unClassified
-                %Original classifications by eye
-             %allMatrix = new_x_y_z(:,:);
+             %customClasses = customClassify(new_x_y_z(:,1:3), orderOfFxns);
+             %allMatrix = [new_x_y_z(:,1:3),customClasses];
+             %Original classifications by eye
+             allMatrix = new_x_y_z(:,:);
+             %%%%%EXTRACT Non-classified neurons%%%%%
+             unClassified = cell(length(allMatrix(allMatrix(:,4)==0)),6);
+             ctr = 1;
+             for k = 1:length(newFileCol)
+                if allMatrix(k,4) == 0
+                    unClassified{ctr,1} = newFileCol{k};
+                    unClassified{ctr,2} = newSPKCCol{k};
+                    unClassified{ctr,3} = allMatrix(k,1);
+                    unClassified{ctr,4} = allMatrix(k,2);
+                    unClassified{ctr,5} = allMatrix(k,3);
+                    unClassified{ctr,6} = allMatrix(k,4);
+                    ctr = ctr + 1;
+                end
+             end
+              directory1(i).name
+             unClassified
+
              for class = 1:numClass
                 classMatrix = allMatrix(allMatrix(:,4) == (class - 1),:);
                 sizeMat = size(classMatrix);
