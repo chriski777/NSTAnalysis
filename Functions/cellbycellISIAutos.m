@@ -27,7 +27,9 @@ function output = cellbycellISIAutos(sepData)
                 cellISIs = ISIconverter(cellSpikes, length(cellSpikes) - 1);
                 n = histc(cellISIs,ctrs);
                 bar(ctrs,n,'histc')
-                title([fileName ' ' SPKCtype ' ' titleMap(i) ' bin = ' num2str(binLength*1000) 'ms'])             
+                title([fileName ' ' SPKCtype ' ' titleMap(i) ' bin = ' num2str(binLength*1000) 'ms'])
+                xlabel('Time Bins (s)')
+                ylabel('Counts/bin')
                 %For AutoCorrs
                 dt = binLength;
                 subplot(4,2,placeMat(currFigRowNum, 2))
@@ -40,6 +42,9 @@ function output = cellbycellISIAutos(sepData)
                 result = result./normVal;       
                 plot(newTime',result)
                 xlim([dt,0.5])
+                title([fileName ' ' SPKCtype ' ' titleMap(i) ' bin = ' num2str(binLength*1000) 'ms'])                             
+                xlabel('Time lag (s)')
+                ylabel('Counts of Events')
             end
         end
     end

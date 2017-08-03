@@ -87,7 +87,7 @@ function result = expFitResults(data)
             f = resultA* exp(resultB*x) + resultC* exp(resultD*x);
             df = diff(f);
             dfy = vpa(subs(df,x,newFitX));
-            m = log(abs(mean(dfy)));
+            m = log(1/abs(mean(dfy)));
 
 %             %Linear Fit of Min and Max 
 %             fitY = fitY./maxVal;

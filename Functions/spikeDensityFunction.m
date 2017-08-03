@@ -27,7 +27,8 @@ function result = spikeDensityFunction(data)
             if offSets(1) < onSets(1)
                 onSets = [0; onSets];
             end
-            beforeOnS = 5; %3 seconds before movement Onset
+           
+            beforeOnS = 5; %5 seconds before movement Onset
             timeAfterOffS = 2;
             
             stdeviation = 0.35;
