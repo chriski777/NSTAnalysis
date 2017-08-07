@@ -55,7 +55,24 @@ function output = mapper(data,fxn,movement,graph)
    if logical(graph)
       counter = 0;
    end
-   
+
+   SPKChanGroups = getit(data.spkchans);
+   SPKChanNames = cell(totalResults,1);
+   counter = 1;
+   for i = 1:length(SPKChanGroups)
+       currChannels = SPKChanGroups{i};
+       [uniqueChannels,index] = unique(currChannels);
+       uniqueChannels = currChannels(sort(index));
+       for k = 1:length(uniqueChannels)
+           uChan = uniqueChannels(k);
+           frequency = sum(currChannels == uChan);
+           for j = 1:frequency
+               charVal = [num2str(uChan),char(97+j)];
+               SPKChanNames{counter} = charVal;
+               counter = counter + 1;
+           end
+       end 
+   end   
    %Apply fxn to each of the spike trains in allTimeStamps
    %%FUNCTION FIELDS VERY IMPORTANT
    for i = (1:totalResults)
@@ -67,6 +84,10 @@ function output = mapper(data,fxn,movement,graph)
           end
        end
        input = struct();
+       %for rasterPlot Parameter
+       input.firstTS = 0;
+       input.endTS = 5;
+       input.SPKCName = SPKChanNames{i};
        %for StatAv Parameter
        input.numOfEqualSegs = 40;
        %for AppEntropy parameter
@@ -92,23 +113,6 @@ function output = mapper(data,fxn,movement,graph)
    resFileName = sprintf('%s Results.csv', fileType);
    fid = fopen(resFileName,'wt');
 
-   SPKChanGroups = getit(data.spkchans);
-   SPKChanNames = cell(totalResults,1);
-   counter = 1;
-   for i = 1:length(SPKChanGroups)
-       currChannels = SPKChanGroups{i};
-       [uniqueChannels,index] = unique(currChannels);
-       uniqueChannels = currChannels(sort(index));
-       for k = 1:length(uniqueChannels)
-           uChan = uniqueChannels(k);
-           frequency = sum(currChannels == uChan);
-           for j = 1:frequency
-               charVal = [num2str(uChan),char(97+j)];
-               SPKChanNames{counter} = charVal;
-               counter = counter + 1;
-           end
-       end 
-   end
    typeCell = typeAssign('custClassification.xlsx',fileType);
    %Writes results to results.csv file with corresponding name and result
    headers = {'FileName', 'SPKCName', 'Spikes', 'End', 'STD', [fxn], 'Class'};   

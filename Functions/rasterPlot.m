@@ -1,12 +1,17 @@
-function intervalSPK = rasterPlot(data)
+function result = rasterPlot(data)
 %Chris Ki, June 2017, Gittis Lab
 %rasterPlot: Draws rasterplot for a given spike train in a timeInterval
 %   SPKC = A single spike train vector where each entry is the timepoint at
 %       occurence of a spike
 %   firstTimeStamp = Left end of time interval for Raster plot
 %   endTimeStamp = right end of time interval 
+
+%Output Parameter: 
+%   result = median of the ISI interval defined by firstTS and endTS
+
     firstTimeStamp = data.firstTS;
     endTimeStamp = data.endTS;
+    figure
     if firstTimeStamp > endTimeStamp || endTimeStamp > length(data.SPKC) || firstTimeStamp == endTimeStamp
          error('Cannot generate a raster plot')
     end
@@ -19,5 +24,6 @@ function intervalSPK = rasterPlot(data)
     ylim([-0.5,0.5])
     set(gca, 'YTick', []);
     xlabel('Time (s)'); % Time is in second
-    title(['Raster Plot from time ' num2str(firstTimeStamp) 's to ' num2str(endTimeStamp) 's']);
+    title([char(data.fileName), ' ' char(data.SPKCName),' Raster Plot from time ', num2str(firstTimeStamp), 's to ', num2str(endTimeStamp), 's']);
+    result = median(intervalSPK);
 end

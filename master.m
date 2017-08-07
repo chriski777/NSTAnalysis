@@ -14,6 +14,7 @@ function master(fxn, dataTypes,movement)
 %       SPK train. 1 means to perform the analysis on only movement phases.
 
     addpath('Functions')
+    addpath(pwd)
     if strcmpi(dataTypes,'full')
         %FULL
         %8x1 cells for the 8 types of data we have
