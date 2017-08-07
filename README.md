@@ -9,6 +9,8 @@ Neural Spike Train Analysis. Allows one to import sorted Plexon files and perfor
   * dApEn (Darin, Soares, Wichmann 2006)
   * Raster Plot Visualization
   * Autocorrelogram Visualization
+  * 2-D ScatterPlot Visualization
+  * 3-D ScatterPlot Visualization
   * Double Exponential (DExp) Fit of Autocorrelograms
   * ISI Histogram Visualization
   * ISI Converter 
@@ -34,6 +36,11 @@ Select the "Add with Subfolders" option and add the directory that contains the 
 
 ![screen shot 2017-08-06 at 6 28 01 pm](https://user-images.githubusercontent.com/10649054/29009110-2a0fcd06-7ad5-11e7-9928-866e23321688.png)
 
+* Also include the condition in the master.m. Make sure to delete the condtions that are not being used from the typeNames array and the corresponding elseif statement. Add elseif statements for your condition and add the condition into the typeNames array. 
+
+![screen shot 2017-08-06 at 7 44 18 pm](https://user-images.githubusercontent.com/10649054/29010466-575ac8dc-7ae0-11e7-9481-94de3ea8fcb6.png)
+
+
    * Currently, there are eight cases (Acute, Alpha-Syn, Gradual, Gradual 35%, Gradual 65%, Naive, Unilateral Depleted, Unilateral Intact) in the dataInitializer.m file. **It is important that you delete the cases along with the files and animalcodes. You will encounter an error unless you have the files listed in the dataInitializer.m file.**
 
    * To add cases, follow this format: 
@@ -52,8 +59,32 @@ Select the "Add with Subfolders" option and add the directory that contains the 
          input.animalcodes = [1 1 2 2 2];
          data = open_data(input);
      ```
+    *  **Please follow the naming convention of naming a PL2 file as 'fileNameAWsorttt-01.pl2'.**
     * Keep in mind your animalcodes should correspond to the number of files you add. 
+    
+* Create an excel file named 'custClassification.xlsx'. Create a separate sheet for each condition/case you have in dataInitializer.m. 
+![screen shot 2017-08-06 at 7 19 26 pm](https://user-images.githubusercontent.com/10649054/29009943-879e6f16-7adc-11e7-9c5e-346423b1d7d2.png)
 
-* Create an excel file named 'custClassification.xlsx'. You should have a separate sheet for each condition/case you have in dataInitializer.m. 
+Follow this format and define four columns that contain **conditionFileName, conditionSPKC, conditionUnit, conditionRegularIrregularBurst'**. The SpKC and unit information can be found via NeuroExplorer. Make sure to have a row in the excel sheet for each file you add in dataInitializer. If the class is unknown, simply put 'No Class'. Once you set the dataInitializer and custClassificaiton file up, you should be good to go. 
+
+## Performing Calculations
+
+### Master
+The master Function will be the most important function you will use in batch processing a certain analysis script.
+The master function takes in three parameters:
+* Handle of function you would like to apply (String). Functions are limited to functions in the Functions directory.
+* The conditions you would like to apply (String). Conditions are 'FULL' ( Applies to all , and the strings of the conditions you have defined: 'Acute', 'Alpha-Syn', etc. 
+* Third parameter: Will be updated in the future. Just use 0 for now. 
+```
+%To calculate the statAv parameter for all conditions you have defined, put this command in the command window of Matlab
+master('statAv', 'FULL', 0)
+
+%To calculate the AppEntropy parameter for a condition 'condition_name' you have defined, put this command in the command window of Matlab:
+
+master('AppEntropy', 'condition_name', 0)
+
+```
+This will create a results folder along with the results for each condition. 
+
 
 # References 
