@@ -14,7 +14,7 @@ Neural Spike Train Analysis. Allows one to import sorted Plexon files and perfor
   * [2D ScatterPlot](#scatterTwoHeader)
   * [3D ScatterPlot](#scatterThreeHeader)
     * [ScatterPlot3d](#scatterThreeDHeader)
-    * [allScatterPlot3d]
+    * [allScatterPlot3d](#scatterallThreeDHeader)
 * [Classification](#classHeader)  
   
 <a name="calcHeader"/>
@@ -236,7 +236,7 @@ A figure like the one above is produced for EACH of the conditions if the comman
 ```
 scatterPlot3d('fanoFactor', 'sampleSkew', 'expFitResults')
 ```
-is used.. 
+is used.
 
 ![screen shot 2017-08-06 at 11 23 16 pm](https://user-images.githubusercontent.com/10649054/29014559-7727dc0e-7afe-11e7-803c-c72a54359afb.png)
 
@@ -245,6 +245,8 @@ Press the button covered by the blue rectangle to rotate the 3D plot. Pressing t
 ![screen shot 2017-08-06 at 11 26 31 pm](https://user-images.githubusercontent.com/10649054/29014636-e276f3e6-7afe-11e7-86ac-912883eb3c41.png)
 
 With the dataTip cursor, you can select a point and see something similar to what is shown above: 
+
+<a name="scatterallThreeDHeader"/>
 
 ##### allscatterPlot3d
 allscatterPlot3D plots **all** datapoints for **all conditions** in the **SAME** figure. Allscatterplot3d is useful in analyzing cumulative data (Similarities of features in Regular/Irregular/Burst neurons among ALL conditions). 
@@ -255,7 +257,7 @@ This function takes 4 input parameters:
 * Third Function handle (String)
 * Extra Functions cell (Cell)
 
-The extra Functions cell should contain function handles that you'd like to see included in the dataTip. If you don't have any extra results you would like to see, just use an empty cell. 
+The extra Functions cell should contain function handles that you'd like to see included in the dataTip. **The extra Functions you use must also have their results already calculated (Must have used master function for extra functions)**.  If you don't have any extra results you would like to see, just use an empty cell. 
 
 ```
 dataTipCell = {'extFunction1',..., 'extFunctionN'};
@@ -263,4 +265,10 @@ allscatterPlot3d('function_one', 'function_two', 'function_three', dataTipCell)
 ```
 ![screen shot 2017-08-07 at 12 16 13 am](https://user-images.githubusercontent.com/10649054/29016081-bb10049e-7b05-11e7-9fcd-0342f7ac4807.png)
 
-The following 3D plot is made when 
+The following 3D plot is made when you type in the following commands:
+```
+dataTipCell = {'CV'};
+allscatterPlot3d('sampleSkew', 'fanoFactor', 'expFitResults', dataTipCell)
+```
+
+### Using the Classifcation Scheme
