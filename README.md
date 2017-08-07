@@ -197,7 +197,7 @@ scatterPlot('function_one', 'function_two', 'Type')
 
 ![screen shot 2017-08-06 at 10 51 07 pm](https://user-images.githubusercontent.com/10649054/29014392-a396c292-7afd-11e7-9507-40bcdf448abf.png)
 
-The following plot is produced when the statement 
+The plot above is produced when the statement 
 ```
 scatterPlot('sampleSkew', 'fanoFactor', 'FULL')
 ```
@@ -205,7 +205,7 @@ is put in the command window.
 
 ![screen shot 2017-08-06 at 10 51 33 pm](https://user-images.githubusercontent.com/10649054/29014381-9815ee16-7afd-11e7-9dc7-903c19c87cf2.png)
 
-The following plot is produced when the statement
+The plot above is produced when the statement
 ```
 scatterPlot('sampleSkew', 'fanoFactor', 'Naive')
 ```
