@@ -20,8 +20,22 @@ Neural Spike Train Analysis. Allows one to import sorted Plexon files and perfor
   * Spike Density Function 
     * Movement-specific Spike Density Function
   * StatAv 
-  
-# SETUP
-Clone/download this reposityory and make sure to add all these folders to the current path in Matlab. Open_data.m, detecMove.m, and loadMoveFile are files that were created by a lab member Tim Whalen. I made edits to these files to make them compatible with the other files in this repository. These files are only included in this repo as they are needed to load the sorted neuron spike trains from Plexon. 
+* Coming Soon
+ * Hurst Exponent
+## Setup Directories
+Clone/download this repository and make sure to add all these folders to the current path in Matlab. Open_data.m, detecMove.m, and loadMoveFile are files that were created by a lab member Tim Whalen. I made edits to these files to make them compatible with the other files in this repository. These files are only included in this repo as they are needed to load the sorted neuron spike trains from Plexon. 
+
+![screen shot 2017-08-06 at 6 01 51 pm](https://user-images.githubusercontent.com/10649054/29008821-fc7f414e-7ad1-11e7-8d51-ce0e8ce61f20.png)
+Select the "Add with Subfolders" option and add the directory that contains the .PL2 files you would like to examine. 
+
+## Prerequisite To-Do List
+* Know how many classes of in-vivo data you would like to examine. This depends on the number of conditions you would like to study: Acute, Gradual, Alpha-Syn, etc. If you just want results for a given dataset, just use one condition.
+* Make sure the condition you want is included in the switch cases of the dataInitializer.m file. 
+![screen shot 2017-08-06 at 6 28 01 pm](https://user-images.githubusercontent.com/10649054/29009110-2a0fcd06-7ad5-11e7-9928-866e23321688.png)
+Currently, there are eight cases (Acute, Alpha-Syn, Gradual, Gradual 35%, Gradual 65%, Naive, Unilateral Depleted, Unilateral Intact) in the dataInitializer.m file. 
+
+![screen shot 2017-08-06 at 6 28 01 pm](https://user-images.githubusercontent.com/10649054/29009110-2a0fcd06-7ad5-11e7-9928-866e23321688.png)
+
+* Make sure to have an excel file named 'custClassification.xlsx' with 4 columns.
 
 # References 
