@@ -73,7 +73,7 @@ Follow this format and define four columns that contain **conditionFileName, con
 The master Function will be the most important function you will use in batch processing a certain analysis script.
 The master function takes in three parameters:
 * Handle of function you would like to apply (String). Functions are limited to functions in the Functions directory.
-* The conditions you would like to apply (String). Conditions are 'FULL' ( Applies to all , and the strings of the conditions you have defined: 'Acute', 'Alpha-Syn', etc. 
+* The conditions you would like to apply (String). Conditions are 'FULL' (Applies to all conditions) , and the strings of the conditions you have defined: 'Acute', 'Alpha-Syn', etc. 
 * Third parameter: Will be updated in the future. Just use 0 for now. 
 ```
 %To calculate the statAv parameter for all conditions you have defined, put this command in the command window of Matlab
@@ -85,5 +85,27 @@ master('AppEntropy', 'condition_name', 0)
 
 ```
 This will create a results folder along with the results for each condition. 
+The following functions can be used as function handles: 
+* 'AppEntropy'
+* 'CV'
+* 'CV2'
+* 'ISIKurtosis'
+* 'allstdISI'
+* 'cellbycellISIAutos'
+* 'dApEn' (only compatible once you calculate AppEntropy and shuffledApEn)
+* 'classISIHists'
+* 'spikedensityfunction'
+* 'expFitAutos'
+* 'expFitResults'
+* 'fanoFactor'
+* 'meanFR'
+* 'meanISI'
+* 'nonParametricSkew'
+* 'pearsonModeSkew'
+* 'pearsonSecSkew'
+* 'sampleSkew'
+* 'shuffledApEn'
+* 'statAv'
+* 'rasterPlot'
 
-
+Parameters for these function handles can be adjusted in the mapper.m file. 
