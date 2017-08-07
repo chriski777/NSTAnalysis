@@ -85,6 +85,7 @@ master('AppEntropy', 'condition_name', 0)
 
 ```
 This will create a results folder along with the results for each condition. 
+Please refer to the function scripts to read about what they exactly calculate. 
 The following functions can be used as function handles: 
 * 'AppEntropy'
 * 'CV'
@@ -109,3 +110,23 @@ The following functions can be used as function handles:
 * 'rasterPlot'
 
 Parameters for these function handles can be adjusted in the mapper.m file. 
+
+## Visualizations
+
+### RasterPlot
+Rasterplot is a visualization function that can be used through the master function. 
+```
+master('rasterPlot', 'condition_name', 0)
+```
+You should get a rasterPlot for each spike train in your file.
+![screen shot 2017-08-06 at 9 31 40 pm](https://user-images.githubusercontent.com/10649054/29012228-c141235a-7aee-11e7-8d6e-f9544de0bc7a.png)
+
+### CellByCellISIAutos
+CellbycellISIAutos is a visualization script that cna also be used through the master function. 
+```
+master('cellbycellISIAutos', 'condition_name', 0)
+```
+Each row of a figure will have an ISI and autocorrelogram corresponding to a single spike train.
+![screen shot 2017-08-06 at 9 35 29 pm](https://user-images.githubusercontent.com/10649054/29012277-32a65b28-7aef-11e7-9a5b-6826963d0b1f.png)
+
+### SpikeDensityFunction
