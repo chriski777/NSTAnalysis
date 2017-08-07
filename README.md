@@ -119,14 +119,26 @@ Rasterplot is a visualization function that can be used through the master funct
 master('rasterPlot', 'condition_name', 0)
 ```
 You should get a rasterPlot for each spike train in your file.
-![screen shot 2017-08-06 at 9 31 40 pm](https://user-images.githubusercontent.com/10649054/29012228-c141235a-7aee-11e7-8d6e-f9544de0bc7a.png)
+![screen shot 2017-08-06 at 9 31 40 pm](https://user-images.githubusercontent.com/10649054/29012433-4a7d5aa2-7af0-11e7-93b4-ecc858bbf7ec.png)
+
 
 ### CellByCellISIAutos
-CellbycellISIAutos is a visualization script that cna also be used through the master function. 
+CellbycellISIAutos is a visualization script that can also be used through the master function. 
 ```
 master('cellbycellISIAutos', 'condition_name', 0)
 ```
 Each row of a figure will have an ISI and autocorrelogram corresponding to a single spike train.
-![screen shot 2017-08-06 at 9 35 29 pm](https://user-images.githubusercontent.com/10649054/29012277-32a65b28-7aef-11e7-9a5b-6826963d0b1f.png)
+![screen shot 2017-08-06 at 9 35 19 pm](https://user-images.githubusercontent.com/10649054/29012443-68600574-7af0-11e7-9fba-dcaae9b9916e.png)
+
+Empty subplots indicate that the given spike train did not fire above the threshold firing rate. The threshold firing rate can be changed in the cellbycellISIAutos.m script. 
 
 ### SpikeDensityFunction
+SpikeDensityFunction is a visualization script that can be used through the master function. It will show the spike density function results over multiple periods of movement. 
+
+You can adjust the time before movement onSet(line 31) and after movement onSet (line 32) in the spikedensityFunction.m file. 
+```
+master('spikeDensityFunction', 'condition_name', 0)
+```
+
+![screen shot 2017-08-06 at 9 47 51 pm](https://user-images.githubusercontent.com/10649054/29012521-06236404-7af1-11e7-9a38-390db753b009.png)
+The first 3 subplots show that there are no movements/ lack of movement periods that fit the minimum time length. The last subplot shows different movement phases along with their spike density. 
