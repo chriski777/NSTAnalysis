@@ -13,7 +13,8 @@ Neural Spike Train Analysis. Allows one to import sorted Plexon files and perfor
   * [Spike Density Function](#sdfHeader)
   * [2D ScatterPlot](#scatterTwoHeader)
   * [3D ScatterPlot](#scatterThreeHeader)
-   * [ScatterPlot3d](#scatterThreeDHeader)
+    * [ScatterPlot3d](#scatterThreeDHeader)
+    * [allScatterPlot3d]
 * [Classification](#classHeader)  
   
 <a name="calcHeader"/>
@@ -189,20 +190,26 @@ It takes in 3 input parameters:
 * Second Function handle (String)
 * Type of Conditions You'd like to examine (String) : 'FULL' creates scatterplots for ALL conditions.
 
+Format of scatterPlot command:
 ```
-scatterPlot('sampleSkew', 'fanoFactor', 'FULL')
+scatterPlot('function_one', 'function_two', 'Type')
 ```
 
 ![screen shot 2017-08-06 at 10 51 07 pm](https://user-images.githubusercontent.com/10649054/29014392-a396c292-7afd-11e7-9507-40bcdf448abf.png)
 
-The following plot is produced when that statement is put in the command window. 
+The following plot is produced when the statement 
+```
+scatterPlot('sampleSkew', 'fanoFactor', 'FULL')
+```
+is put in the command window. 
 
+![screen shot 2017-08-06 at 10 51 33 pm](https://user-images.githubusercontent.com/10649054/29014381-9815ee16-7afd-11e7-9dc7-903c19c87cf2.png)
+
+The following plot is produced when the statement
 ```
 scatterPlot('sampleSkew', 'fanoFactor', 'Naive')
 ```
-
-![screen shot 2017-08-06 at 10 51 33 pm](https://user-images.githubusercontent.com/10649054/29014381-9815ee16-7afd-11e7-9dc7-903c19c87cf2.png)
-The following plot is produced when that statement is put in the command window. 
+is put in the command window. 
 
 <a name="scatterThreeHeader"/>
 
@@ -220,19 +227,40 @@ It takes in 3 input parameters:
 * Third Function handle (String)
 
 ```
-scatterPlot3d('sampleSkew', 'fanoFactor', 'expFitResults')
+scatterPlot3d('function_one', 'function_two', 'function_three')
 ```
 
 ![screen shot 2017-08-06 at 11 20 45 pm](https://user-images.githubusercontent.com/10649054/29014465-f4ac2bc2-7afd-11e7-9053-4956ceea3f6d.png)
 
-A figure like the one above is produced for EACH of the conditions. 
+A figure like the one above is produced for EACH of the conditions if the command:
+```
+scatterPlot3d('fanoFactor', 'sampleSkew', 'expFitResults')
+```
+is used.. 
 
 ![screen shot 2017-08-06 at 11 23 16 pm](https://user-images.githubusercontent.com/10649054/29014559-7727dc0e-7afe-11e7-803c-c72a54359afb.png)
 
 Press the button covered by the blue rectangle to rotate the 3D plot. Pressing the red rectangle will allow you to click on a certain data point and see its corresponding x,y,z values along with its fileName and SPKC unit. 
 
 ![screen shot 2017-08-06 at 11 26 31 pm](https://user-images.githubusercontent.com/10649054/29014636-e276f3e6-7afe-11e7-86ac-912883eb3c41.png)
+
 With the dataTip cursor, you can select a point and see something similar to what is shown above: 
 
+##### allscatterPlot3d
+allscatterPlot3D plots **all** datapoints for **all conditions** in the **SAME** figure. Allscatterplot3d is useful in analyzing cumulative data (Similarities of features in Regular/Irregular/Burst neurons among ALL conditions). 
 
+This function takes 4 input parameters: 
+* First Function handle (String)
+* Second Function handle (String)
+* Third Function handle (String)
+* Extra Functions cell (Cell)
 
+The extra Functions cell should contain function handles that you'd like to see included in the dataTip. If you don't have any extra results you would like to see, just use an empty cell. 
+
+```
+dataTipCell = {'extFunction1',..., 'extFunctionN'};
+allscatterPlot3d('function_one', 'function_two', 'function_three', dataTipCell)
+```
+![screen shot 2017-08-07 at 12 16 13 am](https://user-images.githubusercontent.com/10649054/29016081-bb10049e-7b05-11e7-9fcd-0342f7ac4807.png)
+
+The following 3D plot is made when 
