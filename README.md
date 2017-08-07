@@ -31,11 +31,29 @@ Select the "Add with Subfolders" option and add the directory that contains the 
 ## Prerequisite To-Do List
 * Know how many classes of in-vivo data you would like to examine. This depends on the number of conditions you would like to study: Acute, Gradual, Alpha-Syn, etc. If you just want results for a given dataset, just use one condition.
 * Make sure the condition you want is included in the switch cases of the dataInitializer.m file. 
-![screen shot 2017-08-06 at 6 28 01 pm](https://user-images.githubusercontent.com/10649054/29009110-2a0fcd06-7ad5-11e7-9928-866e23321688.png)
-Currently, there are eight cases (Acute, Alpha-Syn, Gradual, Gradual 35%, Gradual 65%, Naive, Unilateral Depleted, Unilateral Intact) in the dataInitializer.m file. 
 
 ![screen shot 2017-08-06 at 6 28 01 pm](https://user-images.githubusercontent.com/10649054/29009110-2a0fcd06-7ad5-11e7-9928-866e23321688.png)
 
-* Make sure to have an excel file named 'custClassification.xlsx' with 4 columns.
+   * Currently, there are eight cases (Acute, Alpha-Syn, Gradual, Gradual 35%, Gradual 65%, Naive, Unilateral Depleted, Unilateral Intact) in the dataInitializer.m file. **It is important that you delete the cases along with the files and animalcodes. You will encounter an error unless you have the files listed in the dataInitializer.m file.**
+
+   * To add cases, follow this format: 
+     ```
+     case 'CONDITION_NAME'
+         input.files = {
+             %1 From animal one
+             'FILENAMEUNITONESorttt.pl2;'
+             'FILENAMEUNITTWOSorttt.pl2;'  
+
+             %2 From animal two
+             'FILENAMEUNITONESorttt.pl2;'
+             'FILENAMEUNITTWOSorttt.pl2;'       
+             'FILENAMEUNITTHREESorttt.pl2;'   
+             };
+         input.animalcodes = [1 1 2 2 2];
+         data = open_data(input);
+     ```
+    * Keep in mind your animalcodes should correspond to the number of files you add. 
+
+* Create an excel file named 'custClassification.xlsx'. You should have a separate sheet for each condition/case you have in dataInitializer.m. 
 
 # References 
