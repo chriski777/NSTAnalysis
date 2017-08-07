@@ -257,7 +257,7 @@ This function takes 4 input parameters:
 * Third Function handle (String)
 * Extra Functions cell (Cell)
 
-The extra Functions cell should contain function handles that you'd like to see included in the dataTip. **The extra Functions you use must also have their results already calculated (Must have used master function for extra functions)**.  If you don't have any extra results you would like to see, just use an empty cell. 
+The extra Functions cell should contain function handles that you'd like to see included in the dataTip. **The extra Functions you use must also have their results already calculated (Must have used master function for extra functions)**.  If you don't have any extra results you would like to see, just use an empty cell. AllScatterPlot3D also prints to the console the neurons classified as 'No Class'. 
 
 ```
 dataTipCell = {'extFunction1',..., 'extFunctionN'};
@@ -271,4 +271,37 @@ dataTipCell = {'CV'};
 allscatterPlot3d('sampleSkew', 'fanoFactor', 'expFitResults', dataTipCell)
 ```
 
+<a name="classHeader"/>
+
 ### Using the Classifcation Scheme
+This classification scheme employs the fanoFactor, sampleSkew, and doubleExpFit values to assign a neuron 1 of 4 possible types: No Class, Regular, Irregular, or Burst. **IMPORTANT:** To use this classification scheme, please make sure that you have calculated the results for the three parameters through the master function. 
+
+#### reCustClassify
+This function reads in the results of the three functions you want to use to reclassify the data. Based on the results of the three functions, the neurons will be classified by the criteria they meet. These threshold values can be adjusted in the reCustClassify.m script. 
+
+reCustClassify has three input parameters: 
+* First Function handle (String)
+* Second Function handle (String)
+* Third Function handle (String)
+
+```
+reCustClassify('function_one', 'function_two', 'function_three')
+```
+
+To use the classification scheme, you want to focus on the fanoFactor, sampleSkew, and expFitResults results. Thus, use this command:
+```
+reCustClassify('fanoFactor', 'sampleSkew', 'expFitResults')
+```
+![screen shot 2017-08-07 at 12 52 30 am](https://user-images.githubusercontent.com/10649054/29017214-bfcfa99e-7b0a-11e7-9316-aacf308e2354.png)
+
+This command will produce n (the number of conditions there are) condition_name results.csv files in your current directory.
+If you open any one of those files, they will have four columns: FileName, SPKC, Unit, Class. 
+Import each of these files into the 'custClassification.xlsx' file. Each condition should have their own sheet in the excel file. 
+ * Go to Data > From Text (In Get External Data Section)
+Select Delimited data type. Set the delimiters to be only commas when you import the .csv files. Press finish to import your newly classified data. 
+
+![screen shot 2017-08-07 at 1 01 45 am](https://user-images.githubusercontent.com/10649054/29017577-47dcc726-7b0c-11e7-9eff-5888bf00772f.png)
+
+**IMPORTANT** Run the master function for all your functions again so that the classes for each neuron will be updated. 
+
+You may notice that some neurons are unclassified if your threshold values are not generalizable. You can fix this by creating broader threshold values or by manually inspecting the ISI histograms/Autocorrelograms of the 'No Class' neurons. Once you assign the class through visual inspection to each 'No Class' neuron, manually change the 'No Class' values in the 'custClassification.xlsx' to the values determined by visual inspection. Make sure to run the master function for all your functions again so that your classes will be updated. 
