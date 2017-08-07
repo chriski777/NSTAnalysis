@@ -11,6 +11,9 @@ Neural Spike Train Analysis. Allows one to import sorted Plexon files and perfor
   * [Rastor Plot](#rastorHeader)
   * [Cell ISI/Autocorrelogram](#cellISIHeader)
   * [Spike Density Function](#sdfHeader)
+  * [2D ScatterPlot](#scatterTwoHeader)
+  * [3D ScatterPlot](#scatterThreeHeader)
+* [Classification](#classHeader)  
   
 <a name="calcHeader"/>
 
@@ -50,7 +53,7 @@ Select the "Add with Subfolders" option and add the directory that contains the 
 
 <a name="preReqHeader"/>  
 
-## Prerequisite To-Do List
+### Prerequisite To-Do List
 * Know how many classes of in-vivo data you would like to examine. This depends on the number of conditions you would like to study: Acute, Gradual, Alpha-Syn, etc. If you just want results for a given dataset, just use one condition.
 * Make sure the condition you want is included in the switch cases of the dataInitializer.m file. 
 
@@ -173,3 +176,57 @@ master('spikeDensityFunction', 'condition_name', 0)
 
 ![screen shot 2017-08-06 at 9 47 51 pm](https://user-images.githubusercontent.com/10649054/29012521-06236404-7af1-11e7-9a38-390db753b009.png)
 The first 3 subplots show that there are no movements/ lack of movement periods that fit the minimum time length. The last subplot shows different movement phases along with their spike density. 
+
+<a name="scatterTwoHeader"/> 
+
+#### 2D ScatterPlot
+ScatterPlot allows you to produce a 2 dimensional scatterPlot that plots the results of one function against the results of another. Keep in mind, the ScatterPlot **does NOT** apply the functions to the datasets. Rather, it reads the results and then plots the data points in the 2 feature parameter space. Make sure to call the master function for the features first to get their results.
+
+The scatterPlot function is not used via the master function. 
+It takes in 3 input parameters:
+* First Function handle (String)
+* Second Function handle (String)
+* Type of Conditions You'd like to examine (String) : 'FULL' creates scatterplots for ALL conditions.
+
+```
+scatterPlot('sampleSkew', 'fanoFactor', 'FULL')
+```
+produces the following plot: 
+
+![screen shot 2017-08-06 at 10 51 07 pm](https://user-images.githubusercontent.com/10649054/29014392-a396c292-7afd-11e7-9507-40bcdf448abf.png)
+
+```
+scatterPlot('sampleSkew', 'fanoFactor', 'Naive')
+```
+produces the following plot: 
+
+![screen shot 2017-08-06 at 10 51 33 pm](https://user-images.githubusercontent.com/10649054/29014381-9815ee16-7afd-11e7-9dc7-903c19c87cf2.png)
+
+<a name="scatterThreeHeader"/>
+
+#### 3D ScatterPlot
+ScatterPlot3D allows you to produce a 3 dimensional scatterPlot that plots a series of data points in a 3D feature space. Keep in mind, the ScatterPlot3D **does NOT** apply the functions to the datasets. Rather, it reads the results and then plots the data points in the 3 feature parameter space. Make sure to call the master function for the features first to get their results.
+
+The scatterPlot3d function is not used via the master function. 
+It takes in 3 input parameters:
+* First Function handle (String)
+* Second Function handle (String)
+* Third Function handle (String)
+
+```
+scatterPlot3d('sampleSkew', 'fanoFactor', 'expFitResults')
+```
+
+produces a figure like the one below for EACH of the conditions:
+
+![screen shot 2017-08-06 at 11 20 45 pm](https://user-images.githubusercontent.com/10649054/29014465-f4ac2bc2-7afd-11e7-9053-4956ceea3f6d.png)
+
+Press the button covered by the blue rectangle to rotate the 3D plot. Pressing the red rectangle will allow you to click on a certain data point and see its corresponding x,y,z values along with its fileName and SPKC unit. 
+
+![screen shot 2017-08-06 at 11 23 16 pm](https://user-images.githubusercontent.com/10649054/29014559-7727dc0e-7afe-11e7-803c-c72a54359afb.png)
+
+With the dataTip cursor, you can select a point and see something similar to what is shown below: 
+![screen shot 2017-08-06 at 11 26 31 pm](https://user-images.githubusercontent.com/10649054/29014636-e276f3e6-7afe-11e7-86ac-912883eb3c41.png)
+
+
+
