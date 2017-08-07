@@ -16,14 +16,14 @@ Neural Spike Train Analysis. Allows one to import sorted Plexon files and perfor
   * ISI Converter 
   * Kurtosis
   * Pearson's moment coefficient of Skewness
-  * Fano Factor (Darin, Soares, Wichmann 2006)
+  * Fano Factor (Darin, Soares, Wichmann 2006), (Eden & Kramer 2010)
   * Non-parametric skew of ISI distribution
   * Pearson mode Skew 
   * Spike Density Function 
     * Movement-specific Spike Density Function
   * StatAv 
 * Coming Soon
- * Hurst Exponent
+  * Hurst Exponent
 ## Setup Directories
 Clone/download this repository and make sure to add all these folders to the current path in Matlab. Open_data.m, detecMove.m, and loadMoveFile are files that were created by a lab member Tim Whalen. I made edits to these files to make them compatible with the other files in this repository. These files are only included in this repo as they are needed to load the sorted neuron spike trains from Plexon. 
 
@@ -87,4 +87,3 @@ master('AppEntropy', 'condition_name', 0)
 This will create a results folder along with the results for each condition. 
 
 
-# References 
