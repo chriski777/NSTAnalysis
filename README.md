@@ -1,5 +1,20 @@
 # NST Analysis
 Neural Spike Train Analysis. Allows one to import sorted Plexon files and perform a series of statistical analyses on neuronal discharge data through batch processing. 
+
+## Table of Contents  
+* [Calculation Types](#calcHeader)
+* [SetUp Directories](#setHeader)
+* [Prerequisite TODO](#preReqHeader)
+* [Performing Calculations](#perfCalcHeader)
+  * [Master Function](#masterHeader)
+* [Visualization Functions](#visHeader)
+  * [Rastor Plot](#rastorHeader)
+  * [Cell ISI/Autocorrelogram](#cellISIHeader)
+  * [Spike Density Function](#sdfHeader)
+  
+<a name="calcHeader"/>
+
+### Calculation Types
 * Calculations/Types of Analyses one can perform include: 
   * Measures of Central Tendency of ISI distribution: Standard deviation and Mean
   * Mean FR 
@@ -24,11 +39,16 @@ Neural Spike Train Analysis. Allows one to import sorted Plexon files and perfor
   * StatAv 
 * Coming Soon
   * Hurst Exponent
-## Setup Directories
+  
+<a name="setHeader"/>  
+
+### Setup Directories
 Clone/download this repository and make sure to add all these folders to the current path in Matlab. Open_data.m, detecMove.m, and loadMoveFile are files that were created by a lab member Tim Whalen. I made edits to these files to make them compatible with the other files in this repository. These files are only included in this repo as they are needed to load the sorted neuron spike trains from Plexon. 
 
 ![screen shot 2017-08-06 at 6 01 51 pm](https://user-images.githubusercontent.com/10649054/29008821-fc7f414e-7ad1-11e7-8d51-ce0e8ce61f20.png)
 Select the "Add with Subfolders" option and add the directory that contains the .PL2 files you would like to examine. 
+
+<a name="preReqHeader"/>  
 
 ## Prerequisite To-Do List
 * Know how many classes of in-vivo data you would like to examine. This depends on the number of conditions you would like to study: Acute, Gradual, Alpha-Syn, etc. If you just want results for a given dataset, just use one condition.
@@ -67,9 +87,13 @@ Select the "Add with Subfolders" option and add the directory that contains the 
 
 Follow this format and define four columns that contain **conditionFileName, conditionSPKC, conditionUnit, conditionRegularIrregularBurst'**. The SpKC and unit information can be found via NeuroExplorer. Make sure to have a row in the excel sheet for each file you add in dataInitializer. If the class is unknown, simply put 'No Class'. Once you set the dataInitializer and custClassificaiton file up, you should be good to go. 
 
-## Performing Calculations
+<a name="perfCalcHeader"/>  
 
-### Master
+### Performing Calculations
+
+<a name="masterHeader"/>  
+
+#### Master
 The master Function will be the most important function you will use in batch processing a certain analysis script.
 The master function takes in three parameters:
 * Handle of function you would like to apply (String). Functions are limited to functions in the Functions directory.
@@ -111,9 +135,13 @@ The following functions can be used as function handles:
 
 Parameters for these function handles can be adjusted in the mapper.m file. 
 
-## Visualizations
+<a name="visHeader"/> 
 
-### RasterPlot
+### Visualizations
+
+<a name="rastorHeader"/> 
+
+#### RasterPlot
 Rasterplot is a visualization function that can be used through the master function. 
 ```
 master('rasterPlot', 'condition_name', 0)
@@ -121,8 +149,9 @@ master('rasterPlot', 'condition_name', 0)
 You should get a rasterPlot for each spike train in your file.
 ![screen shot 2017-08-06 at 9 31 40 pm](https://user-images.githubusercontent.com/10649054/29012433-4a7d5aa2-7af0-11e7-93b4-ecc858bbf7ec.png)
 
+<a name="cellISIHeader"/> 
 
-### CellByCellISIAutos
+#### CellByCellISIAutos
 CellbycellISIAutos is a visualization script that can also be used through the master function. 
 ```
 master('cellbycellISIAutos', 'condition_name', 0)
@@ -132,7 +161,9 @@ Each row of a figure will have an ISI and autocorrelogram corresponding to a sin
 
 Empty subplots indicate that the given spike train did not fire above the threshold firing rate. The threshold firing rate can be changed in the cellbycellISIAutos.m script. 
 
-### SpikeDensityFunction
+<a name="sdfHeader"/> 
+
+#### SpikeDensityFunction
 SpikeDensityFunction is a visualization script that can be used through the master function. It will show the spike density function results over multiple periods of movement. 
 
 You can adjust the time before movement onSet(line 31) and after movement onSet (line 32) in the spikedensityFunction.m file. 
