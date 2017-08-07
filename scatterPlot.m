@@ -1,4 +1,4 @@
-function [output1, output2] =  scatterPlot(fxn1,fxn2)
+function [output1, output2] =  scatterPlot(fxn1,fxn2,type)
 %Chris Ki, June 2017, Gittis Lab
 %scatterPlot: Displays the scatterplot of the result of two functions. The
 %   scatterPlot function does NOT apply the functions to the results. It
@@ -7,7 +7,7 @@ function [output1, output2] =  scatterPlot(fxn1,fxn2)
 %Input Parameters: 
 %   fxn1: String that contains the first function handle
 %   fxn2: String that contains the second function handle
-
+%   type: String that contains 
 %Output Parameters:
 %   output1 : N (number of files/conditions) x 1 vector containing Medians of results of first fxn
 %   output2 : N x 1 vector containing medians of results of second fxn
@@ -26,10 +26,50 @@ function [output1, output2] =  scatterPlot(fxn1,fxn2)
         output1 = zeros(numFiles1, 1);
         output2 = zeros(numFiles1,1);
         figure
-        for i = 1:numFiles1
-            %directory1 name can be the same as the same results are read
-             fileName1 = ['results\', fxn1,'\', directory1(i).name];
-             fileName2 = ['results\', fxn2,'\', directory1(i).name];
+        if strcmpi(type, 'Full')
+            for i = 1:numFiles1
+                %directory1 name can be the same as the same results are read
+                 fileName1 = ['results\', fxn1,'\', directory1(i).name];
+                 fileName2 = ['results\', fxn2,'\', directory1(i).name];
+                 [~,~,cell1] = xlsread(fileName1);
+                 [~,~,cell2] = xlsread(fileName2);
+                 %Isolate the columns with the fxn results from each cell
+                 firstRow1 = cell1(1,:);
+                 colNum1 = strcmp(firstRow1, [' ',fxn1]);
+                 firstRow2 = cell2(1,:);
+                 colNum2 = strcmp(firstRow2, [' ',fxn2]);
+                 %3rd column will hold the corresponding class integers
+                 % both class columns from file 1 and 2 should be same since
+                 % both files are from same conditions
+                 colNumClass = strcmp(firstRow1, [' ', 'Class']);
+                 firstCol = cell1((2:end),colNum1);
+                 secCol = cell2((2:end),colNum2);
+                 if sum(colNumClass) == 0
+                     colNumClass = strcmp(firstRow2, [' ', 'Class']);
+                     classCol =cell2((2:end),colNumClass);
+                 else
+                    classCol = cell1((2:end),colNumClass);
+                 end
+                 firstCol(strcmp(firstCol, ' NaN')) = {NaN};
+                 secCol(strcmp(secCol,' NaN')) = {NaN};
+                 x_y = cell2mat([firstCol, secCol, classCol]);
+                 %Delete rows where one of the columns has a NaN value
+                 x_y = x_y(~any(isnan(x_y),2),:);
+
+                 %Median of results for both functions
+                 output1(i) = median(x_y(:,1));
+                 output2(i) = median(x_y(:,2));
+                 axes(i) = subplot(4,2,i);   
+                 gscatter(x_y(:,1), x_y(:,2),x_y(:,3),'kbgm', 'oooo')
+                 xlabel(fxn1);
+                 ylabel(fxn2);
+                 title([fxn1 ' vs. ' fxn2 ' for ' directory1(i).name]);
+                 lgd = legend('No Class', 'Regular', 'Irregular', 'Burst');
+            end
+        else 
+             %directory1 name can be the same as the same results are read
+             fileName1 = ['results\', fxn1,'\', type, ' ', 'Results.csv'];
+             fileName2 = ['results\', fxn2,'\', type, ' ', 'Results.csv'];
              [~,~,cell1] = xlsread(fileName1);
              [~,~,cell2] = xlsread(fileName2);
              %Isolate the columns with the fxn results from each cell
@@ -54,15 +94,15 @@ function [output1, output2] =  scatterPlot(fxn1,fxn2)
              x_y = cell2mat([firstCol, secCol, classCol]);
              %Delete rows where one of the columns has a NaN value
              x_y = x_y(~any(isnan(x_y),2),:);
-             
+
              %Median of results for both functions
-             output1(i) = median(x_y(:,1));
-             output2(i) = median(x_y(:,2));
-             axes(i) = subplot(4,2,i);   
+             output1 = median(x_y(:,1));
+             output2 = median(x_y(:,2));
+             axes = subplot(1,1,1);   
              gscatter(x_y(:,1), x_y(:,2),x_y(:,3),'kbgm', 'oooo')
              xlabel(fxn1);
              ylabel(fxn2);
-             title([fxn1 ' vs. ' fxn2 ' for ' directory1(i).name]);
+             title([fxn1 ' vs. ' fxn2 ' for ' type ]);
              lgd = legend('No Class', 'Regular', 'Irregular', 'Burst');
         end
         linkaxes(axes)
